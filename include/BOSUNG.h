@@ -10,9 +10,20 @@
 #include "THUOC.h"
 using namespace std;
 // Cấu trúc dữ liệu về viện phí
+
+struct Benh_nhan;
+struct NODEBN;
+typedef NODEBN* BNNODE;
+typedef NODEBN* DSBN;
+
+struct Bac_si;
+struct NODEBS;
+typedef NODEBS* BSNODE; 
+typedef NODEBS* DSBS; 
+
 struct Hoa_don{
-    DSDV DV;
-    DSThuoc T;
+    DSDV DVBN;
+    DSThuoc TBN;
 };
 struct NODEHD{
     Hoa_don HD;
@@ -22,7 +33,7 @@ typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
 //Them
-long SumBN(DSBN dsbn);
+long SumBN(Benh_nhan BN);
 long SumDV(DSDV dsdv);
 long tonggiaT(THUOC S);
 long sumT(DSThuoc S);

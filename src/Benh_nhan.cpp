@@ -30,18 +30,11 @@ Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     cout << "SDT:";         cin >> A.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> A.Bao_hiem;
-    string name;
-    DisplayDV(dsdv);
-    cout<<"Nhap ten dich vu"<<endl;
-    cin.ignore();
-    getline(cin,name); 
-    DVNODE service = FindDV(dsdv,name);
-    Dich_vu SV = service->DV;
-    InitDV(A.DV);
-    ArrangeDV(A.DV, SV);
+    NhapDV(A, S, dsdv);
+    NhapThuoc(A, S, dsdv);
     return A;
 }
-void NhapThuoc(DSBN& dsbn,DSThuoc S,DSDV dsdv,BNNODE A){    
+void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){    
     int x;
     cout << "Co mua thuoc hay khong ? \n";
     cout << "0. Khong\n1. Co lay thuoc\n" ; cin >> x;
@@ -49,12 +42,31 @@ void NhapThuoc(DSBN& dsbn,DSThuoc S,DSDV dsdv,BNNODE A){
     	cout << "Nhap lai: "; cin >> x;
 	}
 	if(x==1 ){
-	    NhapT(S);
-    	A->BN.T = S;
-	}else{
-			A->BN.T = NULL;
-		}
-    return; 
+	    NhapT(A.Hoa_don->HD.TBN);
+	}
+    else{
+		A.Hoa_don->HD.TBN = NULL;
+	}
+    return;
+}
+
+void NhapDV(Benh_nhan A, DSThuoc T, DSDV dsdv){    
+    DisplayDV(dsdv);
+    cout << "Chon dich vu ban muon \n";
+    NhapDichVu(A.Hoa_don->HD.DVBN);
+    cout << "Ban co muon chon dich vu nao khac khong?" << endl;
+    cout << "Chon 1. Co, 0. Khong" << endl;
+    int x; cin >> x;
+    while(x != 1 && x != 0){
+    cout << "Nhap lai: "; cin >> x;
+    }
+    if(x==1 ){
+        NhapT(A.Hoa_don->HD.TBN);
+    }
+    else{
+        A.Hoa_don->HD.TBN = NULL;
+    }
+    return;
 }
 
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {
@@ -189,16 +201,16 @@ void printfBN(DSBN S) {
         }
         cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
         cout << "\tDanh Sach Dich Vu\n";
-        printfDV(R->BN.DV);
-        //if(R->BN.T == NULL) {
-         //   cout << "Danh sach thuoc cua benh nhan rong.";
-        //}
-        //else printfT(R->BN.T);
-        cout << "Tong vien phi: " << SumBN(S) << endl;
+        printfDV(R->BN.Hoa_don->HD.DVBN);
+        if(R->BN.Hoa_don->HD.TBN == NULL) {
+           cout << "Danh sach thuoc cua benh nhan rong.";
+        }
+        else printfT(R->BN.Hoa_don->HD.TBN);
+        cout << "Tong vien phi: " << SumBN(R->BN) << endl;
         if(R->BN.Bao_hiem == 1){
-        	cout << "Phai tra: " << (SumBN(S)*20)/100;
+        	cout << "Phai tra: " << (SumBN(R->BN)*60)/100;
 		}else{
-			cout << "Phai tra: " << SumBN(S);
+			cout << "Phai tra: " << SumBN(R->BN);
 		}
         R = R->nextBN;
     }

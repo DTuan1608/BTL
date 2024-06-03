@@ -2,8 +2,8 @@
 #include "BOSUNG.h"
 
 using namespace std;
-long SumBN(DSBN S){
-	return S->BN.DV->TongtienDV + S->BN.T->TongtienT;
+long SumBN(Benh_nhan S){
+	return S.Hoa_don->HD.DVBN->TongtienDV + S.Hoa_don->HD.TBN->TongtienT;
 }
 
 long SumDV(DSDV S){
@@ -113,47 +113,6 @@ void printfT(DSThuoc S) {
     cout << "Tong tien: " << S->TongtienT << endl;
 }
 
-// void printfBN(DSBN S) {
-//     cout << "\n\tThong tin benh nhan:" << endl;
-//     if (S == NULL) {
-//         cout << "Danh sach benh nhan rong." << endl;
-//         return;
-//     }
-    
-//     DSBN R = S;
-//     const int numRows = 3;
-//     const int numCols = 2;
-
-//     while (R != NULL) {
-//         string arr[numRows][numCols];
-//         arr[0][0] = "Ho ten: " + R->BN.Ho_tenBN;
-//         arr[0][1] = "Gioi tinh: " + R->BN.Gioi_tinh;
-//         arr[1][0] = "Tuoi: " + to_string(R->BN.Tuoi);
-//         arr[1][1] = "CCCD: " + R->BN.CCCD;
-//         arr[2][0] = "SDT: " + R->BN.SDT;
-//         arr[2][1] = "Que: " + R->BN.Que;
-
-//         for (int j = 0; j < numRows; j++) {
-//             for (int k = 0; k < numCols; k++) {
-//                 cout << arr[j][k] << "\t";
-//             }
-//             cout << endl;
-//         }
-//         cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
-//         cout << "\tDanh Sach Dich Vu\n";
-//         printfDV(R->BN.DV);
-//         printfT(R->BN.T);
-//         cout << "Tong vien phi: " << SumBN(S) << endl;
-//         if(R->BN.Bao_hiem == 1){
-//         	cout << "Phai tra: " << (SumBN(S)*20)/100;
-// 		}else{
-// 			cout << "Phai tra: " << SumBN(S);
-// 		}
-//         R = R->nextBN;
-//     }
-// }
-
-//sua xoa
 void SuaxoaBN(DSBN &S){
     int check ;
     do{
@@ -192,7 +151,7 @@ void SuaxoaBN(DSBN &S){
 			    NodeT r = NULL;
 			    while(r == NULL){
 				    cout << "Nhap lai ma: " ; cin >> i;
-				    r = FindT(p->BN.T,i);
+				    r = FindT(p->BN.Hoa_don->HD.TBN, i);
 			    }
 			    int y;
 			    cout << "0.Xoa\n1.Sua\n"; cin >> y;
@@ -201,11 +160,11 @@ void SuaxoaBN(DSBN &S){
 		    	}
 			    switch(y){
 			    	case 0:{
-				    	DeleteT(p->BN.T,i);
+				    	DeleteT(p->BN.Hoa_don->HD.TBN,i);
 				    	break;
 			    	}
 				    case 1:{
-					    FixT(p->BN.T,i);
+					    FixT(p->BN.Hoa_don->HD.TBN,i);
 				    	break;
 				    }
 			    }
@@ -228,9 +187,8 @@ void Hienthi(){
     cout<<"1. Benh nhan"<<endl;
     cout<<"2. DSDV"<<endl;
     cout<<"3. DSBS"<<endl;
-    cout<<"4. DS Thuoc"<<endl;
-    
-    return; 
+    cout<<"4. DS Thuoc"<<endl;\
+    return;
 }
 void Hienthi1(){
     cout<<"\n\tChon cac thao tac"<<endl;
@@ -238,7 +196,7 @@ void Hienthi1(){
     cout<<"2. Sua thong tin benh nhan"<<endl;
     cout<<"3. Nhap thuoc cho benh nhan"<<endl;
     cout<<"4. In ra thong tin BN"<<endl;
-    
+    return;
 }
 void Hienthi2(){
     cout<<"\n\tChon cac thao tac"<<endl;
@@ -252,7 +210,7 @@ void Hienthi3(){
     cout<<"2. Nhap them bac si(Private)"<<endl;
     return;
 }
-void Dapung(DSBN& dsbn,DSThuoc S,DSDV dsdv,DSBS dsbs){
+void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs){
     int x;
     do{
         Hienthi();
@@ -261,15 +219,15 @@ void Dapung(DSBN& dsbn,DSThuoc S,DSDV dsdv,DSBS dsbs){
             case 1:{
                 int y;
                 Hienthi1();
-                cin>> y ; 
+                cin >> y ; 
                 switch(y){
                     case 1: InsertBN(dsbn , S , dsdv);break;
                     case 2: SuaxoaBN(dsbn);break;
                     case 3:{
                         string cccd;
-                        cout<<"Nhap ma cccd Benh nhan: ";
-                        cin>>cccd;
-                        NhapThuoc(dsbn,S,dsdv,FindBN(dsbn,cccd));
+                        cout << "Nhap ma cccd Benh nhan: ";
+                        cin >> cccd;
+                        //NhapThuoc(FindBN(dsbn, cccd)->BN, S, dsdv);
                         break;
                     }
                     case 4: printfBN(dsbn);break;

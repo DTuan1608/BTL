@@ -8,6 +8,10 @@
 #include "THUOC.h"
 using namespace std;
 
+struct Hoa_don;
+struct NODEHD;
+typedef NODEHD* DSHD;
+
 struct Benh_nhan{
     string Ho_tenBN;
     long Tuoi;
@@ -16,7 +20,7 @@ struct Benh_nhan{
     string CCCD;
     string SDT;
 	int DK, MK, YK; // Ngày bệnh nhân đi khám
-    DSHD HD;
+    DSHD Hoa_don;
     int Bao_hiem; 
 };
 struct NODEBN{
@@ -30,7 +34,8 @@ typedef NODEBN* DSBN;
 void InitBN(DSBN &dsbn);
 int IsEmpty(DSBN dsbn);
 Benh_nhan Create(DSThuoc S,DSDV dsdv);//Tạo 1NODE mới bằng cách nhập từ bàn phím vào
-void NhapThuoc(DSBN& dsbn,DSThuoc S,DSDV dsdv,BNNODE A);
+void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv);
+void NhapDV(Benh_nhan A, DSThuoc T, DSDV dsdv);
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv);
 BNNODE FindBN(DSBN dsbn,string cccd);
 BNNODE FindBNBefore(DSBN dsbn,string cccd);

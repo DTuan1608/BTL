@@ -38,6 +38,6 @@ int main() {
     ArrangeDV(dsdv, DV3);
     ArrangeDV(dsdv, DV4);
     InitBN(dsbn);
-    Dapung(dsbn,T,dsdv,dsbs);
+    Dapung(dsbn, T, dsdv, dsbs);
     return 0;
 }
