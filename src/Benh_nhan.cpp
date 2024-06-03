@@ -1,3 +1,4 @@
+
 //Nguyễn Nhật Hoàng Anh
 #include "BENHNHAN.h"
 #include "BOSUNG.h"
@@ -18,19 +19,15 @@ int IsEmpty(DSBN dsbn) {
 // Tao ra 1 NODE moi bang cach nhap tu ban phim vao
 Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     Benh_nhan A;
-    cin.ignore();
     cout << "Ho va ten:";
-    getline(cin, A.Ho_tenBN);
-    cout << "Tuoi:";
-    cin >> A.Tuoi;
-    cout << "Gioi tinh:";
-    cin >> A.Gioi_tinh;
     cin.ignore();
-    cout << "Que quan: ";
-    getline(cin, A.Que);
-    cout << "So CCCD: "; 
-    cin >> A.CCCD;
-    cout << "SDT:"; cin >> A.SDT;
+    getline(cin, A.Ho_tenBN);
+    cout << "Tuoi:";        cin >> A.Tuoi;
+    cout << "Gioi tinh:";   cin >> A.Gioi_tinh;
+    cin.ignore();
+    cout << "Que quan: ";   getline(cin, A.Que);
+    cout << "So CCCD: ";    cin >> A.CCCD;
+    cout << "SDT:";         cin >> A.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> A.Bao_hiem;
     string name;
@@ -117,8 +114,7 @@ void FixBN(DSBN& dsbn, string cccd) {
         cout << "Tuoi: ";
         cin >> P->BN.Tuoi;
         cout << "Gioi tinh: ";
-        cin >> P->BN.Gioi_tinh;
-        cin.ignore(); 
+        cin >> P->BN.Gioi_tinh; 
         cout << "Que: ";
         getline(cin, P->BN.Que);
         cout << "CCCD: ";
@@ -194,10 +190,10 @@ void printfBN(DSBN S) {
         cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
         cout << "\tDanh Sach Dich Vu\n";
         printfDV(R->BN.DV);
-        if(R->BN.T == NULL) {
-            cout << "Danh sach thuoc cua benh nhan rong.";
-        }
-        else printfT(R->BN.T);
+        //if(R->BN.T == NULL) {
+         //   cout << "Danh sach thuoc cua benh nhan rong.";
+        //}
+        //else printfT(R->BN.T);
         cout << "Tong vien phi: " << SumBN(S) << endl;
         if(R->BN.Bao_hiem == 1){
         	cout << "Phai tra: " << (SumBN(S)*20)/100;

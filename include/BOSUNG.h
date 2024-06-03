@@ -1,3 +1,4 @@
+
 #ifndef BOSUNG_H
 #define BOSUNG_H
 
@@ -9,19 +10,16 @@
 #include "THUOC.h"
 using namespace std;
 // Cấu trúc dữ liệu về viện phí
-struct Vienphi {
-    Benh_nhan BN;
-    int DK, MK, YK;
+struct Hoa_don{
     DSDV DV;
     DSThuoc T;
-    long Tong_VP;
 };
-struct NODEVP{
-    Vienphi VP;
-    NODEVP* nextVP;
+struct NODEHD{
+    Hoa_don HD;
+    NODEHD* nextHD;
 };
-typedef NODEVP* DSVP;
-typedef NODEVP* VPNODE;
+typedef NODEHD* DSHD;
+typedef NODEHD* HDNODE;
 
 //Them
 long SumBN(DSBN dsbn);

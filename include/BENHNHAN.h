@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "BOSUNG.h"
 #include "DICHVU.h"
 #include "THUOC.h"
 using namespace std;
@@ -15,8 +16,7 @@ struct Benh_nhan{
     string CCCD;
     string SDT;
 	int DK, MK, YK; // Ngày bệnh nhân đi khám
-    DSDV DV;
-    DSThuoc T;
+    DSHD HD;
     int Bao_hiem; 
 };
 struct NODEBN{
