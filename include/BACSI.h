@@ -31,5 +31,4 @@ void DeleteBS(DSBS &H, string hotenBS);
 BSNODE FINDBS(DSBS &H, string MS);
 void FixBS(DSBS &H, BSNODE BSBF, BSNODE BSAF) ;
 void PrintBS(DSBS &H);
-
 #endif 
