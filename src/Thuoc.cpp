@@ -3,22 +3,23 @@
 #include "THUOC.h"
 
 using namespace std;
-
+//Khởi tạo danh sách thuốc
 void InitT(DSThuoc &T){
     T = NULL;
 }
+//Kiểm tra danh sách trống
 int emptyT(DSThuoc T) {
     return T == NULL;
 }
-
+//Tạo node thuốc mới
 NodeT makenodeT(THUOC T1) {
     NodeT node = new NODET;
     node->T = T1;
     node->nextT = NULL;
     return node;
 }
-
-NodeT FindT(DSThuoc& T, int Ma_thuoc) {
+//Tìm kiếm thuốc theo mã thuốc
+NodeT FindT(DSThuoc& T, string Ma_thuoc) {
     NodeT p = T;
     while (p != NULL && p->T.Ma_thuoc != Ma_thuoc) {
         p = p->nextT;
@@ -30,8 +31,8 @@ NodeT FindT(DSThuoc& T, int Ma_thuoc) {
         return p;
     }
 }
-
-void DeleteT(DSThuoc& T, int Ma_thuoc) {
+//Xóa Thuốc có mã Ma_thuoc khỏi danh sách
+void DeleteT(DSThuoc& T, string Ma_thuoc) {
     if (emptyT(T)) {
         cout << "Danh Sach Thuoc Rong" << endl;
         return;
@@ -49,8 +50,8 @@ void DeleteT(DSThuoc& T, int Ma_thuoc) {
         delete P;
     }
 }
-
-void FixT(DSThuoc T, int Ma_thuoc) {
+//Chỉnh sửa thông tin thuốc
+void FixT(DSThuoc T, string Ma_thuoc) {
     if (emptyT(T)) {
         cout << "\tDanh Sach Thuoc Rong" << endl;
         return;
@@ -64,8 +65,8 @@ void FixT(DSThuoc T, int Ma_thuoc) {
     p->T.Gia_thuoc = x;
     cout << "Da thay doi gia thuoc" << endl;
 }
-
-void ArrangeT(DSThuoc& T, THUOC T1) {
+//Thêm thuốc dùng cho hàm nhập
+void InsertT_nhap(DSThuoc& T, THUOC T1) {
     NodeT P = makenodeT(T1);
     if (emptyT(T)) {
         T = P;
@@ -82,13 +83,14 @@ void ArrangeT(DSThuoc& T, THUOC T1) {
         }
     }
 }
+//Hiển thị danh sách thuốc
 void Hien_Thi_Thuoc(DSThuoc Thuoc){
     cout << "Ten thuoc: ";      cout << Thuoc->T.Ten_thuoc << endl;
     cout << "Ma thuoc: ";       cout << Thuoc->T.Ma_thuoc << endl;
     cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
     cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
 }
-
+//Nhập Thuốc
 void NhapT(DSThuoc& S) {
     cout << "------------NHAP THUOC-------------\n";
     int x = 1;
@@ -101,11 +103,69 @@ void NhapT(DSThuoc& S) {
         
         cout << "Don gia: "; cin >> T1.Gia_thuoc;
         cout << "So luong: "; cin >> T1.so_luong;
-        ArrangeT(S, T1);
+        InsertT_nhap(S, T1);
         cout << "----------------------\n" << "0.Thoat\n" << "1.Nhap tiep\n";
         cin >> x;
         while (x != 0 && x != 1) {
             cout << "Nhap lai: "; cin >> x;
         }
     }
+}
+//Thành tiền thuốc
+long tonggiaT(THUOC S) {
+    return S.Gia_thuoc * S.so_luong;
+}
+//Tổng thuốc của danh sách
+long sumT(DSThuoc S) {
+    long total = 0;
+    NodeT p = S;
+    while (p != NULL) {
+        total += p->T.Gia_thuoc * p->T.so_luong;
+        p = p->nextT;
+    }
+    return total;
+}
+//In thuoc theo danh sách -> Bệnh nhân
+void printfT(DSThuoc S) {
+    if(S == NULL){
+        cout<<"DS Thuoc rong"<<endl;
+        return;
+    }
+    S->TongtienT = sumT(S);
+    int n = 0;
+    NodeT P = S;
+    while (P != NULL) {
+        P = P->nextT;
+        n++;
+    }
+
+    NodeT R = S;
+    string arr[100][6];
+
+    // Gán tiêu d? cho m?ng
+    arr[0][0] = "STT";
+    arr[0][1] = "Ma";
+    arr[0][2] = "Ten";
+    arr[0][3] = "Gia";
+    arr[0][4] = "So luong";
+    arr[0][5] = "Thanh tien";
+
+    // Gán giá tr? cho m?ng
+    for (int i = 1; i <= n; i++) {
+        arr[i][0] = to_string(i);
+        arr[i][1] = R->T.Ma_thuoc;
+        arr[i][2] = R->T.Ten_thuoc;
+        arr[i][3] = to_string(R->T.Gia_thuoc);
+        arr[i][4] = to_string(R->T.so_luong);
+        arr[i][5] = to_string(tonggiaT(R->T));
+        R = R->nextT;
+    }
+    cout << "\tDanh Sach Thuoc" << endl;
+    for (int j = 0; j <= n; j++) {
+        for (int k = 0; k < 6; k++) {
+            cout << arr[j][k] << "\t";
+        }
+        cout << endl;
+    }
+    cout << "Tong tien: " << S->TongtienT << endl;
 }

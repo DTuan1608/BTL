@@ -7,15 +7,14 @@
 #include <string.h>
 
 using namespace std;
-
+//Khởi tạo danh sách bệnh nhân
 void InitBN(DSBN &dsbn){
     dsbn = NULL;
 }
-
+//Kiểm tra danh sách trống
 int IsEmpty(DSBN dsbn) {
     return (dsbn == NULL);
 }
-
 // Tao ra 1 NODE moi bang cach nhap tu ban phim vao
 Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     Benh_nhan A;
@@ -30,44 +29,9 @@ Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     cout << "SDT:";         cin >> A.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> A.Bao_hiem;
-    //InsertDVforBN(A, S, dsdv);
-    NhapThuoc(A, S, dsdv);
     return A;
 }
-void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
-    Hien_Thi_Thuoc(S);
-    int x;
-    cout << "Co mua thuoc hay khong ? \n";
-    cout << "0. Khong\n1. Co lay thuoc\n" ; cin >> x;
-    while(x != 1 && x != 0){
-    	cout << "Nhap lai: "; cin >> x;
-	}
-	if(x==1 ){
-        long ma_thuoc;
-        cin >> ma_thuoc;
-        NodeT T1 = FindT(S, ma_thuoc);
-        ArrangeT(A.Hoa_don->HD.TBN, T1->T);
-	}
-    else{
-		A.Hoa_don->HD.TBN = NULL;
-	}
-    return;
-}
-
-void InsertDVforBN(Benh_nhan A, DSThuoc T, DSDV DSDV){
-    DisplayDV(DSDV);
-    cout << "Chon dich vu ban muon" << endl;
-    cin.ignore();
-    string name;
-    cin >> name;
-    InitDV(A.Hoa_don->HD.DVBN);
-    //Dich_vu DVx = FindDV(DSDV, name);
-    //InsertDV(A.Hoa_don->HD.DVBN, DVx);
-    DisplayDV(A.Hoa_don->HD.DVBN);
-    cout << "Ban co muon chon dich vu nao khac khong?"<< endl;
-    cout << "1. Co , 0. Khong" << endl;
-}
-
+//Thêm bệnh nhận vào danh sách
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {
     int check;
     do{
@@ -81,7 +45,6 @@ void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {
         cin.ignore();
     } while (check);    
 }
-
 // Tim benh nhan voi so cccd cho truoc 
 BNNODE FindBN(DSBN dsbn, string cccd) {
     BNNODE R = dsbn;
@@ -92,7 +55,6 @@ BNNODE FindBN(DSBN dsbn, string cccd) {
     cout << "Khong tim thay BN" << endl;
     return NULL;
 }
-
 // Tim BN o truoc benh nhan voi so cccd cho truoc 
 BNNODE FindBNBefore(DSBN dsbn, string cccd) {
     BNNODE R = dsbn;
@@ -171,18 +133,16 @@ void ArrangeBN(DSBN& dsbn) {
         }
     } while (check);
 }
-
+//In bệnh nhân ....
 void printfBN(DSBN S) {
     cout << "\n\tThong tin benh nhan:" << endl;
     if (S == NULL) {
         cout << "Danh sach benh nhan rong." << endl;
         return;
     }
-    
     DSBN R = S;
     const int numRows = 3;
     const int numCols = 2;
-
     while (R != NULL) {
         string arr[numRows][numCols];
         arr[0][0] = "Ho ten: " + R->BN.Ho_tenBN;
@@ -214,17 +174,77 @@ void printfBN(DSBN S) {
         R = R->nextBN;
     }
 }
-Dich_vu Select_Service(DSDV dsdv){
-    cout << "Chon dich vu: ";
-    int x;
-    printfDV(dsdv);
-    cin >> x;
-    switch (x)
-    {
-    case 1:
-        return (dsdv->DV);
-        break;
-    default:
-        break;
-    }
+//Sửa - xóa Bệnh nhân.
+void SuaxoaBN(DSBN &S){
+    int check ;
+    do{
+	    string a;
+	    cout << "Nhap cccd cua BN muon duoc sua: " ; cin >> a;
+	    BNNODE p = NULL;
+	    while(p == NULL){
+		    cout << "Nhap lai cccd: " ; cin >> a;
+		    p = FindBN(S,a);
+	    }
+	
+	    int x;
+	    cout << "0.Xoa\n1.Thong tin\n2.Dich vu\n3.Thuoc\n";
+	    cin >> x; 
+	    while(x < 0 || x > 3){
+		    cout << "Nhap lai: "; cin >> x;
+	    }
+	    switch(x){
+		    case 0: {
+			    DeleteBN(S,a);
+			    break;
+		    }
+		    case 1:{
+			    FixBN(S,a);
+			    break;
+		    }
+		    case 2:{
+//			cout << "0."
+			    break;
+		    }
+		    case 3:{
+			    int x;
+			    while(x == 1){
+			    string i;
+			    cout << "Nhap ma thuoc: "; cin >> i;
+			    NodeT r = NULL;
+			    while(r == NULL){
+				    cout << "Nhap lai ma: " ; cin >> i;
+				    r = FindT(p->BN.Hoa_don->HD.TBN, i);
+			    }
+			    int y;
+			    cout << "0.Xoa\n1.Sua\n"; cin >> y;
+			    while(y != 0 && y != 1){
+				    cout << "Nhap lai: "; cin >>y;
+		    	}
+			    switch(y){
+			    	case 0:{
+				    	DeleteT(p->BN.Hoa_don->HD.TBN,i);
+				    	break;
+			    	}
+				    case 1:{
+					    FixT(p->BN.Hoa_don->HD.TBN,i);
+				    	break;
+				    }
+			    }
+			    cout << "0.khong\n1.\nSua tiep\n"; cin >> x;
+			    while(x != 0 && x != 1){
+				    cout << "Nhap lai: "; cin >> x;
+			    }
+			    }
+			    break;
+		    }
+        }
+        cout << "\n\tThong tin benh nhan sau khi sua:" << endl;
+        printfBN(S);
+        cout << "Co tiep tuc sua nua khong:(1. Co , 2. Khong)"<<endl;
+        cin >> check;
+	} while (check);	
+}
+//Tổng tiền cho bệnh nhân S.
+long SumBN(Benh_nhan S){
+	return S.Hoa_don->HD.DVBN->TongtienDV + S.Hoa_don->HD.TBN->TongtienT;
 }

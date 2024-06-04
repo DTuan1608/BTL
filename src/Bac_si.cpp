@@ -89,7 +89,7 @@ void DeleteBS(DSBS &H, string hotenBS) {
 
 // FindBS(......)
 BSNODE FINDBS(DSBS &H, string hotenBS) {
-    cout << "Nhap ten Bac si can tim: ";
+    cout << "Nhap ten Bac si ban muon thuc hien thao tac: ";
     cin >> hotenBS;
     BSNODE Q = H;
     while (Q->nextBS != NULL) {

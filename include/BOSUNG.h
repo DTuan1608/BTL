@@ -22,6 +22,7 @@ typedef NODEBS* DSBS;
 
 struct Hoa_don{
     string Ma_HD;
+    int dd, mm, yy;
     DSDV DVBN;
     DSThuoc TBN;
 };
@@ -33,14 +34,7 @@ typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
 //Them
-long SumBN(Benh_nhan BN);
-long SumDV(DSDV dsdv);
-long tonggiaT(THUOC S);
-long sumT(DSThuoc S);
-void printfDV(DSDV dsdv);
 void printfT(DSThuoc S);
-//void printfBN(DSBN S);
-void SuaxoaBN(DSBN &S);
 void Hienthi();//Các dánh sách quan lý
 void Hienthi1();//Các thao tác đối với danh sách
 void Hienthi2();

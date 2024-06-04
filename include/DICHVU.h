@@ -25,11 +25,14 @@ typedef NODEDV* DSDV;
 void InitDV(DSDV& dsdv);
 int emptyDV(DSDV S);
 DVNODE makenodeDV(Dich_vu T1);
-void DeleteDV(DSDV& S, string name);
 Dich_vu FindDV(DSDV S, string name);
-void ArrangeDV(DSDV& S, Dich_vu T1);
+void DeleteDV(DSDV& S, string name);
+void InsertDV_nhap(DSDV& S, Dich_vu T1);
 void InsertDV(DSDV &dsdv, Dich_vu DV);
 void FixDV(DSDV& S, string name, long newPrice);
 void NhapDichVu(DSDV& S);
+long SumDV(DSDV S);
+void printfDV(DSDV S);
 void DisplayDV(DSDV S);
+//Dich_vu Select_Service(DSDV dsdv);
 #endif 
