@@ -1,4 +1,3 @@
-
 //Nguyễn Nhật Hoàng Anh
 #include "BENHNHAN.h"
 #include "BOSUNG.h"
@@ -31,13 +30,27 @@ Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     cin >> A.Bao_hiem;
     return A;
 }
+BNNODE Create1(DSThuoc S, DSDV dsdv){
+    BNNODE Q = new NODEBN;
+    cout << "Ho va ten:";
+    cin.ignore();
+    getline(cin, Q->BN.Ho_tenBN);
+    cout << "Tuoi:";        cin >> Q->BN.Tuoi;
+    cout << "Gioi tinh:";   cin >> Q->BN.Gioi_tinh;
+    cin.ignore();
+    cout << "Que quan: ";   getline(cin, Q->BN.Que);
+    cout << "So CCCD: ";    cin >> Q->BN.CCCD;
+    cout << "SDT:";         cin >> Q->BN.SDT;
+    cout << "BHYT (1. Co, 0. Khong):" << endl;
+    cin >> Q->BN.Bao_hiem;
+    return Q;
+}
 //Thêm bệnh nhận vào danh sách
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {
     int check;
     do{
         cout << "\t" << "Nhap thong tin benh nhan" << endl;
-        BNNODE P = new NODEBN;
-        P->BN = Create(S,dsdv);
+        BNNODE P = Create1(S,dsdv);
         P->nextBN = dsbn;
         dsbn = P;
         cout << "Ban co muon nhap benh nhan tiep? (1: Co, 0: Khong): ";

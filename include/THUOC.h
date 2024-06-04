@@ -34,5 +34,7 @@ void Hien_Thi_Thuoc(DSThuoc Thuoc);
 void NhapT(DSThuoc &T);
 long tonggiaT(THUOC S);
 long sumT(DSThuoc S);
+void printfT(DSThuoc S);
+THUOC Select_Medicine(DSThuoc dst);
 
 #endif 

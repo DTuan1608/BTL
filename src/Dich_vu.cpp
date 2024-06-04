@@ -58,25 +58,6 @@ void DeleteDV(DSDV& S, string name) {
         delete P;
     }
 }
-//Thêm dịch vụ -> Dành cho hàm nhập
-void InsertDV_nhap(DSDV& S, Dich_vu T1) {
-    DVNODE P = makenodeDV(T1);
-    if (emptyDV(S)) {
-        S = P;
-    }
-    else {
-        if (P->DV.Ten_DV[0] <= 'A') {
-            P->nextDV = S;
-            S = P;
-        }
-        else {
-            DVNODE R = S;
-            while (R->nextDV != NULL && R->nextDV->DV.Ten_DV < P->DV.Ten_DV) R = R->nextDV;
-            P->nextDV = R->nextDV;
-            R->nextDV = P;
-        }
-    }
-}
 //Thêm dịch vụ - Dành cho hóa đơn thêm.
 void InsertDV(DSDV &dsdv, Dich_vu DV) {
     DVNODE P = new NODEDV;
@@ -119,7 +100,7 @@ void NhapDichVu(DSDV& S) {
         getline(cin, DV.Ten_DV);
         cout << "Nhap gia dich vu: ";
         cin >> DV.Gia_DV;
-        InsertDV_nhap(S, DV);
+        InsertDV(S, DV);
         cout << "0. Khong, 1. Nhap tiep: ";
         cin >> x;
         while (x != 1 && x != 0) {
@@ -163,11 +144,8 @@ void printfDV(DSDV S) {
         P = P->nextDV;
         n++;
     }
-
     DSDV R = S;
     string arr[100][3];
-
-    // Assigning headers to the array
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
     arr[0][2] = "Thanh tien";
@@ -189,19 +167,12 @@ void printfDV(DSDV S) {
     }
     cout << "Tong tien: " << S->TongtienDV << endl;
 }
-
 //Chọn dịch vụ
-/*Dich_vu Select_Service(DSDV dsdv){
-    cout << "Chon dich vu: ";
-    int x;
-    printfDV(dsdv);
-    cin >> x;
-    switch (x)
-    {
-    case 1:
-        return (dsdv->DV);
-        break;
-    default:
-        break;
-    }
-}*/
+Dich_vu Select_Service(DSDV dsdv){
+    DisplayDV(dsdv);
+    cout << "Nhap ten dich vu ban muon chon: ";
+    string name;
+    cin >> name;
+    Dich_vu k = FindDV(dsdv, name);
+    return k;
+}

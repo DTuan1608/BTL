@@ -34,7 +34,10 @@ typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
 //Them
-void printfT(DSThuoc S);
+void Init_Hoadon(DSHD &dshd);
+void Insert_Hoadon(Benh_nhan BN1, DSHD &dshd, Hoa_don HDM);
+void InsertDSDV_Hoadon(Benh_nhan A, DSDV dsdv);
+void InsertDST_Hoadon(Benh_nhan A, DSThuoc dst);
 void Hienthi();//Các dánh sách quan lý
 void Hienthi1();//Các thao tác đối với danh sách
 void Hienthi2();

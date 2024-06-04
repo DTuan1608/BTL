@@ -91,7 +91,7 @@ void Hien_Thi_Thuoc(DSThuoc Thuoc){
     cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
 }
 //Nhập Thuốc
-void NhapT(DSThuoc& S) {
+void NhapT(DSThuoc& S){
     cout << "------------NHAP THUOC-------------\n";
     int x = 1;
     while (x == 1) {
@@ -168,4 +168,13 @@ void printfT(DSThuoc S) {
         cout << endl;
     }
     cout << "Tong tien: " << S->TongtienT << endl;
+}
+
+THUOC Select_Medicine(DSThuoc dst){
+    Hien_Thi_Thuoc(dst);
+    cout << "Nhap ten thuoc ban muon chon: ";
+    string Ma_thuoc;
+    cin >> Ma_thuoc;
+    THUOC k = FindT(dst, Ma_thuoc)->T;
+    return k;
 }

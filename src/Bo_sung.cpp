@@ -4,12 +4,35 @@
 using namespace std;
 
 void Init_Hoadon(DSHD &dshd){
-    dshd = NULL;
+    dshd->HD.DVBN = NULL;
+    dshd->HD.TBN = NULL;
 }
 void Insert_Hoadon(Benh_nhan BN1, DSHD &dshd, Hoa_don HDM){
-    
+    InsertDSDV_Hoadon(BN1, HDM.DVBN);
+}
+void InsertDST_Hoadon(Benh_nhan A, DSThuoc dst){
+    int x;
+    do{
+        THUOC T = Select_Medicine(dst);
+        InsertT_nhap(A.Hoa_don->HD.TBN, T);
+        cout << "Ban co muon chon thuoc tiep khong?" << endl;
+        cout << "1. Co          0. Khong" << endl;
+        cout << "Ban chon: ";
+        cin >> x;
+    }while(x);
 }
 
+void InsertDSDV_Hoadon(Benh_nhan A, DSDV dsdv){
+    int x;
+    do{
+        Dich_vu DV = Select_Service(dsdv);
+        InsertDV(A.Hoa_don->HD.DVBN, DV);
+        cout << "Ban co muon chon dich vu tiep khong?" << endl;
+        cout << "1. Co          0. Khong" << endl;
+        cout << "Ban chon: ";
+        cin >> x;
+    }while(x);
+}
 void Hienthi(){
     cout<<"\n\tChon cac chuc nang"<<endl;
     cout<<"1. Benh nhan"<<endl;
@@ -19,11 +42,12 @@ void Hienthi(){
     return;
 }
 void Hienthi1(){
-    cout<<"\n\tChon cac thao tac"<<endl;
-    cout<<"1. Nhap thong tin benh nhan"<<endl;
-    cout<<"2. Sua thong tin benh nhan"<<endl;
-    cout<<"3. Nhap thuoc cho benh nhan"<<endl;
-    cout<<"4. In ra thong tin BN"<<endl;
+    cout << "\n\tChon cac thao tac" << endl;
+    cout << "1. Nhap thong tin benh nhan" << endl;
+    cout << "2. Sua thong tin benh nhan" << endl;
+    cout << "3. Chon thuoc cho benh nhan" << endl;
+    cout << "4. Chon dich vu cho benh nhan" << endl;
+    cout << "5. In ra thong tin benh nhan" << endl;
     return;
 }
 void Hienthi2(){
@@ -38,7 +62,7 @@ void Hienthi3(){
     cout<<"2. Nhap them bac si(Private)"<<endl;
     return;
 }
-void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs){
+void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs){
     int x;
     do{
         Hienthi();
@@ -49,16 +73,22 @@ void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs){
                 Hienthi1();
                 cin >> y ; 
                 switch(y){
-                    case 1: InsertBN(dsbn , S , dsdv);break;
+                    case 1: InsertBN(dsbn , T, dsdv);break;
                     case 2: SuaxoaBN(dsbn);break;
                     case 3:{
                         string cccd;
                         cout << "Nhap ma cccd Benh nhan: ";
                         cin >> cccd;
-                        //NhapThuoc(FindBN(dsbn, cccd)->BN, S, dsdv);
+                        InsertDST_Hoadon(FindBN(dsbn, cccd)->BN, T);
                         break;
                     }
-                    case 4: printfBN(dsbn);break;
+                    case 4:{
+                        string cccd;
+                        cout << "Nhap ma cccd Benh nhan: ";
+                        cin >> cccd; 
+                        InsertDSDV_Hoadon(FindBN(dsbn, cccd)->BN, dsdv);break;
+                    }
+                    case 5: printfBN(dsbn);break;
                 }
                 break;
             }
@@ -81,7 +111,7 @@ void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs){
                     case 2:InsertBS(dsbs);break;
                 }
             }
-            case 4:printfT(S);break;
+            case 4:printfT(T);break;
         }
     } while(1);
 }
