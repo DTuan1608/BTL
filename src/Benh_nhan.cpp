@@ -38,7 +38,7 @@ void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
     int x;
     cout << "Co mua thuoc hay khong ? \n";
     cout << "0. Khong\n1. Co lay thuoc\n" ; cin >> x;
-    while(x !=1 &&x != 0){
+    while(x != 1 && x != 0){
     	cout << "Nhap lai: "; cin >> x;
 	}
 	if(x==1 ){
@@ -52,21 +52,17 @@ void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
 
 void NhapDV(Benh_nhan A, DSThuoc T, DSDV dsdv){    
     DisplayDV(dsdv);
-    cout << "Chon dich vu ban muon \n";
-    NhapDichVu(A.Hoa_don->HD.DVBN);
-    cout << "Ban co muon chon dich vu nao khac khong?" << endl;
-    cout << "Chon 1. Co, 0. Khong" << endl;
-    int x; cin >> x;
-    while(x != 1 && x != 0){
-    cout << "Nhap lai: "; cin >> x;
+    int x;
+    do{
+        cout << "Chon dich vu ban muon \n";
+        string name;
+        cin >> name;
+        InsertDV(A.Hoa_don->HD.DVBN, FindDV(dsdv, name));
+        cout << "Ban co muon chon dich vu nao khac khong?" << endl;
+        cout << "Chon 1. Co, 0. Khong" << endl;
+        cin >> x;
     }
-    if(x==1 ){
-        NhapT(A.Hoa_don->HD.TBN);
-    }
-    else{
-        A.Hoa_don->HD.TBN = NULL;
-    }
-    return;
+    while(x);
 }
 
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {

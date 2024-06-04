@@ -20,15 +20,13 @@ DVNODE makenodeDV(Dich_vu T1) {
 
 DVNODE FindDV(DSDV S, string name) {
     DSDV p = S;
-    while (p != NULL && p->DV.Ten_DV != name) {
+    while (p != NULL) {
+        if(p->DV.Ten_DV == name){
+            return p;
+        }
         p = p->nextDV;
     }
-    if (p == NULL) {
-        return NULL;
-    }
-    else {
-        return p;
-    }
+    return NULL;
 }
 
 void DeleteDV(DSDV& S, string name) {
@@ -73,6 +71,19 @@ void ArrangeDV(DSDV& S, Dich_vu T1) {
     }
 }
 
+void InsertDV(DSDV &dsdv, DVNODE P) {
+    if (dsdv == NULL || dsdv->DV.Ten_DV >= P->DV.Ten_DV) {
+        P->nextDV = dsdv;
+        dsdv = P;
+    } else {
+        DVNODE Q = dsdv;
+        while (Q->nextDV != NULL && Q->nextDV->DV.Ten_DV < Q->DV.Ten_DV) {
+            Q = Q->nextDV;
+        }
+        P->nextDV = Q->nextDV;
+        Q->nextDV = P;
+    }
+}
 void FixDV(DSDV& S, string name, long newPrice) {
     if (emptyDV(S)) {
         cout << "Danh Sach Rong" << endl;
