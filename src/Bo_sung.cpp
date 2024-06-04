@@ -7,14 +7,14 @@ void Init_Hoadon(DSHD &dshd){
     dshd->HD.DVBN = NULL;
     dshd->HD.TBN = NULL;
 }
-void Insert_Hoadon(Benh_nhan BN1, DSHD &dshd, Hoa_don HDM){
+void Insert_Hoadon(BNNODE BN1, DSHD &dshd, Hoa_don HDM){
     InsertDSDV_Hoadon(BN1, HDM.DVBN);
 }
-void InsertDST_Hoadon(Benh_nhan A, DSThuoc dst){
+void InsertDST_Hoadon(BNNODE A, DSThuoc dst){
     int x;
     do{
         THUOC T = Select_Medicine(dst);
-        InsertT_nhap(A.Hoa_don->HD.TBN, T);
+        InsertT_nhap(A->Hoa_don->HD.TBN, T);
         cout << "Ban co muon chon thuoc tiep khong?" << endl;
         cout << "1. Co          0. Khong" << endl;
         cout << "Ban chon: ";
@@ -22,11 +22,11 @@ void InsertDST_Hoadon(Benh_nhan A, DSThuoc dst){
     }while(x);
 }
 
-void InsertDSDV_Hoadon(Benh_nhan A, DSDV dsdv){
+void InsertDSDV_Hoadon(BNNODE A, DSDV dsdv){
     int x;
     do{
         Dich_vu DV = Select_Service(dsdv);
-        InsertDV(A.Hoa_don->HD.DVBN, DV);
+        InsertDV(A->Hoa_don->HD.DVBN, DV);
         cout << "Ban co muon chon dich vu tiep khong?" << endl;
         cout << "1. Co          0. Khong" << endl;
         cout << "Ban chon: ";
@@ -79,14 +79,14 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs){
                         string cccd;
                         cout << "Nhap ma cccd Benh nhan: ";
                         cin >> cccd;
-                        InsertDST_Hoadon(FindBN(dsbn, cccd)->BN, T);
+                        InsertDST_Hoadon(FindBN(dsbn, cccd), T);
                         break;
                     }
                     case 4:{
                         string cccd;
                         cout << "Nhap ma cccd Benh nhan: ";
                         cin >> cccd; 
-                        InsertDSDV_Hoadon(FindBN(dsbn, cccd)->BN, dsdv);break;
+                        InsertDSDV_Hoadon(FindBN(dsbn, cccd), dsdv);break;
                     }
                     case 5: printfBN(dsbn);break;
                 }

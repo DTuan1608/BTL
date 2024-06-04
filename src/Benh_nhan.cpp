@@ -43,6 +43,7 @@ BNNODE Create1(DSThuoc S, DSDV dsdv){
     cout << "SDT:";         cin >> Q->BN.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> Q->BN.Bao_hiem;
+    Init_Hoadon(Q->Hoa_don);
     return Q;
 }
 //Thêm bệnh nhận vào danh sách
@@ -173,16 +174,16 @@ void printfBN(DSBN S) {
         }
         cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
         cout << "\tDanh Sach Dich Vu\n";
-        printfDV(R->BN.Hoa_don->HD.DVBN);
-        if(R->BN.Hoa_don->HD.TBN == NULL) {
+        printfDV(R->Hoa_don->HD.DVBN);
+        if(R->Hoa_don->HD.TBN == NULL) {
            cout << "Danh sach thuoc cua benh nhan rong.";
         }
-        else printfT(R->BN.Hoa_don->HD.TBN);
-        cout << "Tong vien phi: " << SumBN(R->BN) << endl;
+        else printfT(R->Hoa_don->HD.TBN);
+        cout << "Tong vien phi: " << SumBN(R) << endl;
         if(R->BN.Bao_hiem == 1){
-        	cout << "Phai tra: " << (SumBN(R->BN)*60)/100;
+        	cout << "Phai tra: " << (SumBN(R)*60)/100;
 		}else{
-			cout << "Phai tra: " << SumBN(R->BN);
+			cout << "Phai tra: " << SumBN(R);
 		}
         R = R->nextBN;
     }
@@ -226,7 +227,7 @@ void SuaxoaBN(DSBN &S){
 			    NodeT r = NULL;
 			    while(r == NULL){
 				    cout << "Nhap lai ma: " ; cin >> i;
-				    r = FindT(p->BN.Hoa_don->HD.TBN, i);
+				    r = FindT(p->Hoa_don->HD.TBN, i);
 			    }
 			    int y;
 			    cout << "0.Xoa\n1.Sua\n"; cin >> y;
@@ -235,11 +236,11 @@ void SuaxoaBN(DSBN &S){
 		    	}
 			    switch(y){
 			    	case 0:{
-				    	DeleteT(p->BN.Hoa_don->HD.TBN,i);
+				    	DeleteT(p->Hoa_don->HD.TBN,i);
 				    	break;
 			    	}
 				    case 1:{
-					    FixT(p->BN.Hoa_don->HD.TBN,i);
+					    FixT(p->Hoa_don->HD.TBN,i);
 				    	break;
 				    }
 			    }
@@ -258,6 +259,6 @@ void SuaxoaBN(DSBN &S){
 	} while (check);	
 }
 //Tổng tiền cho bệnh nhân S.
-long SumBN(Benh_nhan S){
-	return S.Hoa_don->HD.DVBN->TongtienDV + S.Hoa_don->HD.TBN->TongtienT;
+long SumBN(BNNODE S){
+	return S->Hoa_don->HD.DVBN->TongtienDV + S->Hoa_don->HD.TBN->TongtienT;
 }
