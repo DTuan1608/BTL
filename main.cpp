@@ -39,5 +39,6 @@ int main() {
     InsertDV(dsdv, DV4);
     InitBN(dsbn);
     Dapung(dsbn, T, dsdv, dsbs);
+    cout << "Hello worl" << endl;
     return 0;
 }
