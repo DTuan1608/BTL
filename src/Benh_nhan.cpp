@@ -30,11 +30,12 @@ Benh_nhan Create(DSThuoc S, DSDV dsdv) {
     cout << "SDT:";         cin >> A.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> A.Bao_hiem;
-    NhapDV(A, S, dsdv);
+    //InsertDVforBN(A, S, dsdv);
     NhapThuoc(A, S, dsdv);
     return A;
 }
-void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){    
+void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
+    Hien_Thi_Thuoc(S);
     int x;
     cout << "Co mua thuoc hay khong ? \n";
     cout << "0. Khong\n1. Co lay thuoc\n" ; cin >> x;
@@ -42,7 +43,10 @@ void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
     	cout << "Nhap lai: "; cin >> x;
 	}
 	if(x==1 ){
-	    NhapT(A.Hoa_don->HD.TBN);
+        long ma_thuoc;
+        cin >> ma_thuoc;
+        NodeT T1 = FindT(S, ma_thuoc);
+        ArrangeT(A.Hoa_don->HD.TBN, T1->T);
 	}
     else{
 		A.Hoa_don->HD.TBN = NULL;
@@ -50,19 +54,18 @@ void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv){
     return;
 }
 
-void NhapDV(Benh_nhan A, DSThuoc T, DSDV dsdv){    
-    DisplayDV(dsdv);
-    int x;
-    do{
-        cout << "Chon dich vu ban muon \n";
-        string name;
-        cin >> name;
-        InsertDV(A.Hoa_don->HD.DVBN, FindDV(dsdv, name));
-        cout << "Ban co muon chon dich vu nao khac khong?" << endl;
-        cout << "Chon 1. Co, 0. Khong" << endl;
-        cin >> x;
-    }
-    while(x);
+void InsertDVforBN(Benh_nhan A, DSThuoc T, DSDV DSDV){
+    DisplayDV(DSDV);
+    cout << "Chon dich vu ban muon" << endl;
+    cin.ignore();
+    string name;
+    cin >> name;
+    InitDV(A.Hoa_don->HD.DVBN);
+    //Dich_vu DVx = FindDV(DSDV, name);
+    //InsertDV(A.Hoa_don->HD.DVBN, DVx);
+    DisplayDV(A.Hoa_don->HD.DVBN);
+    cout << "Ban co muon chon dich vu nao khac khong?"<< endl;
+    cout << "1. Co , 0. Khong" << endl;
 }
 
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {

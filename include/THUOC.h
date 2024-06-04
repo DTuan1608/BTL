@@ -7,7 +7,7 @@ using namespace std;
 
 typedef struct THUOC {
     string Ten_thuoc;
-    int Ma_thuoc;
+    long Ma_thuoc;
     long  Gia_thuoc;
     int so_luong;
 } THUOC;
@@ -30,5 +30,7 @@ void DeleteT(DSThuoc &T, int Ma_thuoc);
 void FixT(DSThuoc T, int Ma_thuoc);
 void ArrangeT(DSThuoc &T, THUOC T1);
 long tonggiaT(THUOC);
+void Hien_Thi_Thuoc(DSThuoc Thuoc);
 void NhapT(DSThuoc &T);
+
 #endif 

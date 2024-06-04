@@ -82,6 +82,12 @@ void ArrangeT(DSThuoc& T, THUOC T1) {
         }
     }
 }
+void Hien_Thi_Thuoc(DSThuoc Thuoc){
+    cout << "Ten thuoc: ";      cout << Thuoc->T.Ten_thuoc << endl;
+    cout << "Ma thuoc: ";       cout << Thuoc->T.Ma_thuoc << endl;
+    cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
+    cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
+}
 
 void NhapT(DSThuoc& S) {
     cout << "------------NHAP THUOC-------------\n";

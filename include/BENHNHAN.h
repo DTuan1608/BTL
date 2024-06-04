@@ -35,7 +35,7 @@ void InitBN(DSBN &dsbn);
 int IsEmpty(DSBN dsbn);
 Benh_nhan Create(DSThuoc S,DSDV dsdv);//Tạo 1NODE mới bằng cách nhập từ bàn phím vào
 void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv);
-void NhapDV(Benh_nhan A, DSThuoc T, DSDV dsdv);
+void InsertDVforBN(Benh_nhan A, DSThuoc T, DSDV DSDV);
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv);
 BNNODE FindBN(DSBN dsbn,string cccd);
 BNNODE FindBNBefore(DSBN dsbn,string cccd);

@@ -18,15 +18,18 @@ DVNODE makenodeDV(Dich_vu T1) {
     return node;
 }
 
-DVNODE FindDV(DSDV S, string name) {
-    DSDV p = S;
+Dich_vu FindDV(DSDV S, string name) {
+    DVNODE p = S;
     while (p != NULL) {
         if(p->DV.Ten_DV == name){
-            return p;
+            return p->DV;
         }
         p = p->nextDV;
     }
-    return NULL;
+    Dich_vu Q;
+    Q.Ten_DV = "";
+    Q.Gia_DV = 0;
+    return Q;
 }
 
 void DeleteDV(DSDV& S, string name) {
@@ -34,7 +37,8 @@ void DeleteDV(DSDV& S, string name) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    DVNODE P = FindDV(S, name);
+    Dich_vu Q = FindDV(S, name);
+    DVNODE P = makenodeDV(Q);
     if (P == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;
@@ -71,7 +75,10 @@ void ArrangeDV(DSDV& S, Dich_vu T1) {
     }
 }
 
-void InsertDV(DSDV &dsdv, DVNODE P) {
+void InsertDV(DSDV &dsdv, Dich_vu DV) {
+    DVNODE P = new NODEDV;
+    P->DV = DV;
+    P->nextDV = NULL;
     if (dsdv == NULL || dsdv->DV.Ten_DV >= P->DV.Ten_DV) {
         P->nextDV = dsdv;
         dsdv = P;
@@ -89,7 +96,8 @@ void FixDV(DSDV& S, string name, long newPrice) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    DVNODE p = FindDV(S, name);
+    Dich_vu Q = FindDV(S, name);
+    DVNODE p = makenodeDV(Q);
     if (p == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;

@@ -1,4 +1,3 @@
-
 #ifndef BOSUNG_H
 #define BOSUNG_H
 
@@ -22,6 +21,7 @@ typedef NODEBS* BSNODE;
 typedef NODEBS* DSBS; 
 
 struct Hoa_don{
+    string Ma_HD;
     DSDV DVBN;
     DSThuoc TBN;
 };
@@ -46,4 +46,5 @@ void Hienthi1();//Các thao tác đối với danh sách
 void Hienthi2();
 void Hienthi3();
 void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs);
+
 #endif
