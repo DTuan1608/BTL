@@ -45,11 +45,18 @@ HDNODE find_Hoadon(DSHD dshd, string ma_hd) {
 void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
     DisplayDV(dsdv);
     int x;
+    DVNODE Dichvu;
     do{
-        cout << "Nhap dich vu ban muon chon." << endl; 
-        string name;
-        cin >> name;
-        DVNODE Dichvu = FindDV(dsdv, name);
+        while(true){
+            cout << "Nhap dich vu ban muon chon." << endl; 
+            string name;
+            cin >> name;
+            Dichvu = FindDV(dsdv, name);
+            if(Dichvu != NULL){
+                break;
+            }
+            else cout << "Nhap lai" << endl;
+        }
         if (hd.DVBN == nullptr) {
             hd.DVBN = dv;
         } else {
@@ -73,6 +80,10 @@ void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst) {
         string Ma_thuoc;
         cin >> Ma_thuoc;
         NodeT t = FindT(dst, Ma_thuoc);
+        int Soluong;
+        cout << "Nhap so luong thuoc" << endl;
+        cin >> Soluong;
+        t->T.so_luong = Soluong;
         if (hd.TBN == nullptr) {
             hd.TBN = t;
         } else {

@@ -88,10 +88,10 @@ void Hien_Thi_Thuoc(DSThuoc Thuoc){
     NodeT T = Thuoc;
     while (T->nextT != NULL)
     {
-        cout << "Ten thuoc: ";      cout << Thuoc->T.Ten_thuoc << endl;
-        cout << "Ma thuoc: ";       cout << Thuoc->T.Ma_thuoc << endl;
+        cout << "Ten thuoc: \t";      cout << Thuoc->T.Ten_thuoc << endl;
+        cout << "Ma thuoc: \t";       cout << Thuoc->T.Ma_thuoc << endl;
         cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
-        cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
+        cout << "Gia thuoc: \t";      cout << Thuoc->T.Gia_thuoc << endl;
         T = T->nextT;
     }
 
@@ -137,26 +137,20 @@ void printfT(DSThuoc S) {
         cout<<"DS Thuoc rong"<<endl;
         return;
     }
-    S->TongtienT = sumT(S);
     int n = 0;
     NodeT P = S;
     while (P != NULL) {
         P = P->nextT;
         n++;
     }
-
     NodeT R = S;
     string arr[100][6];
-
-    // Gán tiêu d? cho m?ng
     arr[0][0] = "STT";
     arr[0][1] = "Ma";
     arr[0][2] = "Ten";
     arr[0][3] = "Gia";
     arr[0][4] = "So luong";
     arr[0][5] = "Thanh tien";
-
-    // Gán giá tr? cho m?ng
     for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->T.Ma_thuoc;
@@ -173,7 +167,6 @@ void printfT(DSThuoc S) {
         }
         cout << endl;
     }
-    cout << "Tong tien: " << S->TongtienT << endl;
 }
 
 THUOC Select_Medicine(DSThuoc dst){

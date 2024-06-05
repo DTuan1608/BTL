@@ -118,7 +118,7 @@ void PrintBS(DSBS &H) {
     } else {
         cout<<"\n----------Danh sach Bac si-----------"<<endl;
         BSNODE Q = H;
-        while (Q != NULL) {
+        while (Q->nextBS != NULL) {
             cout << "Ho ten BS: " << Q->BS.Ho_tenBS << endl;
             cout << "Chuc vu: " << Q->BS.Chuc_vu << endl;
             cout << "Gia kham: " << Q->BS.Gia_kham << endl;

@@ -134,18 +134,16 @@ void printfDV(DSDV S) {
     }
     S->TongtienDV = SumDV(S);
     int n = 0;
-    DSDV P = S;
+    DVNODE P = S;
     while (P != NULL) {
         P = P->nextDV;
         n++;
     }
-    DSDV R = S;
+    DVNODE R = S;
     string arr[100][3];
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
     arr[0][2] = "Thanh tien";
-
-    // Assigning values to the array
     for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->DV.Ten_DV;
@@ -160,7 +158,6 @@ void printfDV(DSDV S) {
         }
         cout << endl;
     }
-    cout << "Tong tien: " << S->TongtienDV << endl;
 }
 //Chọn dịch vụ
 Dich_vu Select_Service(DSDV dsdv){
