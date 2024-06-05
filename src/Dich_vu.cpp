@@ -21,18 +21,15 @@ DVNODE makenodeDV(Dich_vu T1) {
     return node;
 }
 //Tiềm kiếm dịch vụ theo tên DV
-Dich_vu FindDV(DSDV S, string name) {
+DVNODE FindDV(DSDV S, string name) {
     DVNODE p = S;
     while (p != NULL) {
         if(p->DV.Ten_DV == name){
-            return p->DV;
+            return p;
         }
         p = p->nextDV;
     }
-    Dich_vu Q;
-    Q.Ten_DV = "";
-    Q.Gia_DV = 0;
-    return Q;
+    return NULL;
 }
 //Xóa dịch vụ khỏi danh sách
 void DeleteDV(DSDV& S, string name) {
@@ -40,8 +37,7 @@ void DeleteDV(DSDV& S, string name) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    Dich_vu Q = FindDV(S, name);
-    DVNODE P = makenodeDV(Q);
+    DVNODE P = FindDV(S, name);
     if (P == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;
@@ -81,8 +77,7 @@ void FixDV(DSDV& S, string name, long newPrice) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    Dich_vu Q = FindDV(S, name);
-    DVNODE p = makenodeDV(Q);
+    DVNODE p = FindDV(S, name);
     if (p == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;
@@ -173,6 +168,6 @@ Dich_vu Select_Service(DSDV dsdv){
     cout << "Nhap ten dich vu ban muon chon: ";
     string name;
     cin >> name;
-    Dich_vu k = FindDV(dsdv, name);
-    return k;
+    DVNODE k = FindDV(dsdv, name);
+    return k->DV;
 }

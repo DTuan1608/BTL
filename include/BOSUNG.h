@@ -34,14 +34,18 @@ typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
 //Them
-void Init_Hoadon(DSHD &dshd);
-void Insert_Hoadon(Benh_nhan BN1, DSHD &dshd, Hoa_don HDM);
-void InsertDSDV_Hoadon(BNNODE A, DSDV dsdv);
-void InsertDST_Hoadon(BNNODE A, DSThuoc dst);
+HDNODE Creat_hoa_don(string mahd, int dd, int mm, int yy);
+void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD, DSThuoc dst, DSDV dsdv);
+HDNODE find_Hoadon(DSHD dshd, string ma_hd);
+void addServiceToInvoice(Hoa_don& hd, DVNODE dv);
+void addMedicineToInvoice(Hoa_don& hd, NodeT t);
+void InsertDSDV_Hoadon(DSHD &dshd, DSDV dsdv);
+void InsertDST_Hoadon(DSHD &dshd, DSThuoc dst);
 void Hienthi();//Các dánh sách quan lý
 void Hienthi1();//Các thao tác đối với danh sách
 void Hienthi2();
 void Hienthi3();
-void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs);
+void Hienthi4();
+void Dapung(DSBN& dsbn, DSThuoc S, DSDV dsdv, DSBS dsbs, DSHD dshd);
 
 #endif

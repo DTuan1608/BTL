@@ -43,7 +43,8 @@ BNNODE Create1(DSThuoc S, DSDV dsdv){
     cout << "SDT:";         cin >> Q->BN.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> Q->BN.Bao_hiem;
-    Init_Hoadon(Q->Hoa_don);
+    HDNODE P = Creat_hoa_don(Q->Hoa_don->HD.Ma_HD, Q->Hoa_don->HD.dd, Q->Hoa_don->HD.mm, Q->Hoa_don->HD.yy);
+    add_HoaDon_to_Benhnhan(Q, P, S, dsdv);
     return Q;
 }
 //Thêm bệnh nhận vào danh sách

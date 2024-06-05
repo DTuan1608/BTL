@@ -5,6 +5,7 @@
 #include "BOSUNG.h"
 
 int main() {
+    DSHD dshd = NULL;
     DSBN dsbn = NULL;
     DSDV dsdv = NULL;
     DSThuoc T = NULL;
@@ -38,6 +39,6 @@ int main() {
     InsertDV(dsdv, DV3);
     InsertDV(dsdv, DV4);
     InitBN(dsbn);
-    Dapung(dsbn, T, dsdv, dsbs);
+    Dapung(dsbn, T, dsdv, dsbs, dshd);
     return 0;
 }
