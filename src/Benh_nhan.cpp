@@ -43,8 +43,7 @@ BNNODE Create1(DSThuoc S, DSDV dsdv){
     cout << "SDT:";         cin >> Q->BN.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> Q->BN.Bao_hiem;
-    HDNODE P = Creat_hoa_don(Q->Hoa_don->HD.Ma_HD, Q->Hoa_don->HD.dd, Q->Hoa_don->HD.mm, Q->Hoa_don->HD.yy);
-    add_HoaDon_to_Benhnhan(Q, P, S, dsdv);
+    Q->Hoa_don = NULL;
     return Q;
 }
 //Thêm bệnh nhận vào danh sách
@@ -175,7 +174,10 @@ void printfBN(DSBN S) {
         }
         cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
         cout << "\tDanh Sach Dich Vu\n";
-        printfDV(R->Hoa_don->HD.DVBN);
+        if(R->Hoa_don->HD.DVBN == NULL){
+            cout << "Khong co dich vu duoc chon" << endl;
+        }
+        else printfDV(R->Hoa_don->HD.DVBN);
         if(R->Hoa_don->HD.TBN == NULL) {
            cout << "Danh sach thuoc cua benh nhan rong.";
         }

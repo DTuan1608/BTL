@@ -85,10 +85,16 @@ void InsertT_nhap(DSThuoc& T, THUOC T1) {
 }
 //Hiển thị danh sách thuốc
 void Hien_Thi_Thuoc(DSThuoc Thuoc){
-    cout << "Ten thuoc: ";      cout << Thuoc->T.Ten_thuoc << endl;
-    cout << "Ma thuoc: ";       cout << Thuoc->T.Ma_thuoc << endl;
-    cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
-    cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
+    NodeT T = Thuoc;
+    while (T->nextT != NULL)
+    {
+        cout << "Ten thuoc: ";      cout << Thuoc->T.Ten_thuoc << endl;
+        cout << "Ma thuoc: ";       cout << Thuoc->T.Ma_thuoc << endl;
+        cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
+        cout << "Gia thuoc: ";      cout << Thuoc->T.Gia_thuoc << endl;
+        T = T->nextT;
+    }
+
 }
 //Nhập Thuốc
 void NhapT(DSThuoc& S){
