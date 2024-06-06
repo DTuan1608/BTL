@@ -53,18 +53,13 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
             cin >> name;
             Dichvu = FindDV(dsdv, name);
             if(Dichvu != NULL){
+                InsertDV(hd.DVBN, Dichvu->DV);
                 break;
             }
-            else cout << "Nhap lai" << endl;
-        }
-        if (hd.DVBN == nullptr) {
-            hd.DVBN = dv;
-        } else {
-            DVNODE temp = hd.DVBN;
-            while (temp->nextDV != nullptr) {
-                temp = temp->nextDV;
+            else {
+                cout << "Dich vu ban chon khong co, moi ban nhap lai. " << endl;
+                continue;
             }
-            temp->nextDV = dv;
         }
         cout << "Ban co muon chon them dich vu khong?" << endl;
         cout << "Chon 1. Co hoac 0.Khong" << endl;
@@ -73,7 +68,7 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
 }
 //Thêm thuốc cho hóa đơn
 void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst) {
-    Hien_Thi_Thuoc(dst);
+    hienThiDanhSachThuoc(dst);
     int x;
     do{
         cout << "Nhap thuoc ban muon chon." << endl; 
@@ -81,18 +76,20 @@ void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst) {
         cin >> Ma_thuoc;
         NodeT t = FindT(dst, Ma_thuoc);
         int Soluong;
+        cout << "So luong thuoc co ma " << t->T.Ma_thuoc << " la: ";
+        cout << t->T.so_luong << endl;
         cout << "Nhap so luong thuoc" << endl;
         cin >> Soluong;
-        t->T.so_luong = Soluong;
-        if (hd.TBN == nullptr) {
-            hd.TBN = t;
-        } else {
-            NodeT temp = hd.TBN;
-            while (temp->nextT != nullptr) {
-                temp = temp->nextT;
-            }
-            temp->nextT = t;
+        if(Soluong <= dst->T.so_luong){
+            t->T.so_luong = Soluong;
+            dst ->T.so_luong -= Soluong;
         }
+        else{
+            cout << "Nhap lai so luong thuoc ban lay." << endl;
+            cout << "Vui long nhap it hon so luong benh vien con" << endl;
+            cin >> Soluong;
+        }
+        InsertT_nhap(hd.TBN, t->T);
         cout << "Ban co muon chon them thuoc khong?" << endl;
         cout << "Chon 1. Co hoac 0.Khong" << endl;
         cin >> x;

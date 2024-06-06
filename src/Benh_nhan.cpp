@@ -154,7 +154,7 @@ void printfBN(DSBN S) {
         cout << "Danh sach benh nhan rong." << endl;
         return;
     }
-    DSBN R = S;
+    BNNODE R = S;
     const int numRows = 3;
     const int numCols = 2;
     while (R != NULL) {
@@ -190,6 +190,7 @@ void printfBN(DSBN S) {
 		}
         R = R->nextBN;
     }
+    cout << endl;
 }
 //Sửa - xóa Bệnh nhân.
 void SuaxoaBN(DSBN &S){
@@ -223,8 +224,8 @@ void SuaxoaBN(DSBN &S){
 			    break;
 		    }
 		    case 3:{
-			    int x;
-			    while(x == 1){
+			    int a;
+			    while(a == 1){
 			    string i;
 			    cout << "Nhap ma thuoc: "; cin >> i;
 			    NodeT r = NULL;

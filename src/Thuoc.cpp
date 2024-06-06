@@ -1,11 +1,13 @@
 
 //Hà Hữu An
 #include "THUOC.h"
+#include <iomanip>
 
 using namespace std;
 //Khởi tạo danh sách thuốc
 void InitT(DSThuoc &T){
     T = NULL;
+    T->TongtienT = 0;
 }
 //Kiểm tra danh sách trống
 int emptyT(DSThuoc T) {
@@ -83,19 +85,25 @@ void InsertT_nhap(DSThuoc& T, THUOC T1) {
         }
     }
 }
-//Hiển thị danh sách thuốc
-void Hien_Thi_Thuoc(DSThuoc Thuoc){
-    NodeT T = Thuoc;
-    while (T->nextT != NULL)
-    {
-        cout << "Ten thuoc: \t";      cout << Thuoc->T.Ten_thuoc << endl;
-        cout << "Ma thuoc: \t";       cout << Thuoc->T.Ma_thuoc << endl;
-        cout << "So luong thuoc: "; cout << Thuoc->T.so_luong << endl;
-        cout << "Gia thuoc: \t";      cout << Thuoc->T.Gia_thuoc << endl;
-        T = T->nextT;
-    }
 
+//Hiển thị danh sách thuốc
+void hienThiDanhSachThuoc(DSThuoc danhSachThuoc) {
+    cout << left << setw(10) << "Ma_thuoc" 
+         << setw(10) << "So_luong" 
+         << setw(20) << "Ten_thuoc" 
+         << setw(10) << "Gia_thuoc" 
+         << endl;
+    NodeT temp = danhSachThuoc;
+    while (temp != nullptr) {
+        cout << left << setw(10) << temp->T.Ma_thuoc
+             << setw(10) << temp->T.so_luong 
+             << setw(30) << temp->T.Ten_thuoc 
+             << setw(10) << temp->T.Gia_thuoc 
+             << endl;
+        temp = temp->nextT;
+    }
 }
+
 //Nhập Thuốc
 void NhapT(DSThuoc& S){
     cout << "------------NHAP THUOC-------------\n";
@@ -167,13 +175,4 @@ void printfT(DSThuoc S) {
         }
         cout << endl;
     }
-}
-
-THUOC Select_Medicine(DSThuoc dst){
-    Hien_Thi_Thuoc(dst);
-    cout << "Nhap ten thuoc ban muon chon: ";
-    string Ma_thuoc;
-    cin >> Ma_thuoc;
-    THUOC k = FindT(dst, Ma_thuoc)->T;
-    return k;
 }

@@ -8,6 +8,7 @@ using namespace std;
 //Khởi tạo dịch vụ
 void InitDV(DSDV& dsdv){
     dsdv = NULL;
+    dsdv->TongtienDV = 0;
 }
 //Kiểm tra danh sách dịch vụ có trống không?
 int emptyDV(DSDV S) {
@@ -132,7 +133,6 @@ void printfDV(DSDV S) {
         cout<<"Danh sach dich vu rong"<<endl;
         return;
     }
-    S->TongtienDV = SumDV(S);
     int n = 0;
     DVNODE P = S;
     while (P != NULL) {
@@ -144,13 +144,22 @@ void printfDV(DSDV S) {
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
     arr[0][2] = "Thanh tien";
-    for (int i = 1; i <= n; i++) {
+    /*for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->DV.Ten_DV;
         arr[i][2] = to_string(R->DV.Gia_DV);
         R = R->nextDV;
+    }*/
+    int i = 1;
+    while(R->nextDV != NULL){
+        if (i <= n){
+            arr[i][0] = to_string(i);
+            arr[i][1] = R->DV.Ten_DV;
+            arr[i][2] = to_string(R->DV.Gia_DV);
+            i++;
+        }
+        R = R->nextDV;
     }
-
     // Printing the array
     for (int j = 0; j <= n; j++) {
         for (int k = 0; k < 3; k++) {
