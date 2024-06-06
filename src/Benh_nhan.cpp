@@ -181,12 +181,12 @@ void printfBN(DSBN S) {
         if(R->Hoa_don->HD.TBN == NULL) {
            cout << "Danh sach thuoc cua benh nhan rong.";
         }
-        else printfT(R->Hoa_don->HD.TBN);
-        cout << "Tong vien phi: " << SumBN(R) << endl;
+        else printfT1(R->Hoa_don->HD.TBN);
+        cout << "Tong vien phi: " <<  SumBN(R->Hoa_don->HD.DVBN, R->Hoa_don->HD.TBN) << endl;
         if(R->BN.Bao_hiem == 1){
-        	cout << "Phai tra: " << (SumBN(R)*60)/100;
+        	cout << "Phai tra: " << (SumBN(R->Hoa_don->HD.DVBN, R->Hoa_don->HD.TBN)*60)/100;
 		}else{
-			cout << "Phai tra: " << SumBN(R);
+			cout << "Phai tra: " << SumBN(R->Hoa_don->HD.DVBN, R->Hoa_don->HD.TBN);
 		}
         R = R->nextBN;
     }
@@ -196,7 +196,7 @@ void printfBN2(DSBN dsbn){
     string cccd;
     BNNODE R = nullptr;
     do{
-        cout << "Nhap cccd của BN: "; cin >> cccd;
+        cout << "Nhap cccd cua BN: "; cin >> cccd;
         R = FindBN(dsbn, cccd);
         
     }while (R == NULL);
@@ -225,13 +225,14 @@ void printfBN2(DSBN dsbn){
         if(R->Hoa_don->HD.TBN == NULL) {
            cout << "Danh sach thuoc cua benh nhan rong.";
         }
-        else printfT(R->Hoa_don->HD.TBN);
-        cout << "Tong vien phi: " << SumBN(R) << endl;
-        if(R->BN.Bao_hiem == 1){
-        	cout << "Phai tra: " << (SumBN(R)*60)/100;
-		}else{
-			cout << "Phai tra: " << SumBN(R);
-		}
+        else printfT1(R->Hoa_don->HD.TBN);
+        int totalCost = SumBN(R->Hoa_don->HD.DVBN, R->Hoa_don->HD.TBN);
+        cout << "Tong vien phi: " << totalCost << endl;
+        if (R->BN.Bao_hiem) {
+            cout << "Phai tra: " << (totalCost * 60) / 100 << endl;
+        } else {
+            cout << "Phai tra: " << totalCost << endl;
+        }
 }
 //Sửa - xóa Bệnh nhân.
 void SuaxoaBN(DSBN &S){
@@ -243,8 +244,7 @@ void SuaxoaBN(DSBN &S){
 	    while(p == NULL){
 		    cout << "Nhap lai cccd: " ; cin >> a;
 		    p = FindBN(S,a);
-	    }
-	
+        }
 	    int x;
 	    cout << "0.Xoa\n1.Thong tin\n2.Dich vu\n3.Thuoc\n";
 	    cin >> x; 
@@ -304,6 +304,6 @@ void SuaxoaBN(DSBN &S){
 	} while (check);	
 }
 //Tổng tiền cho bệnh nhân S.
-long SumBN(BNNODE S){
-	return S->Hoa_don->HD.DVBN->TongtienDV + S->Hoa_don->HD.TBN->TongtienT;
+long SumBN(DSDV dsdv, DSThuoc dst){
+	return dsdv->TongtienDV + dst->TongtienT;
 }

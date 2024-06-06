@@ -88,15 +88,15 @@ void InsertT_nhap(DSThuoc& T, THUOC T1) {
 //Hiển thị danh sách thuốc
 void hienThiDanhSachThuoc(DSThuoc danhSachThuoc) {
     cout << left << setw(10) << "Ma_thuoc" 
-         << setw(10) << "So_luong" 
          << setw(20) << "Ten_thuoc" 
-         << setw(10) << "Gia_thuoc" 
+         << setw(10) << "So_luong" 
+         << setw(15) << "Gia_thuoc" 
          << endl;
     NodeT temp = danhSachThuoc;
     while (temp != nullptr) {
-        cout << left << setw(10) << temp->T.Ma_thuoc
-             << setw(10) << temp->T.so_luong 
-             << setw(30) << temp->T.Ten_thuoc 
+        cout << left << setw(10) << temp->T.Ma_thuoc 
+             << setw(25) << temp->T.Ten_thuoc 
+             << setw(10) << temp->T.so_luong
              << setw(10) << temp->T.Gia_thuoc 
              << endl;
         temp = temp->nextT;
@@ -137,7 +137,7 @@ long sumT(DSThuoc S) {
     }
     return total;
 }
-//In thuoc theo danh sách -> Bệnh nhân
+//In thuoc theo danh sách
 void printfT(DSThuoc S) {
     if(S == NULL){
         cout<<"DS Thuoc rong"<<endl;
@@ -173,4 +173,33 @@ void printfT(DSThuoc S) {
         }
         cout << endl;
     }
+    cout << "Tong Tien thuoc la: " << sumT(S);
+}
+
+void printfT1(DSThuoc S) {
+    if (S == NULL) {
+        cout << "DS Thuoc rong" << endl;
+        return;
+    }
+    
+    int n = 0;
+    NodeT P = S;
+    while (P != NULL) {
+        P = P->nextT;
+        n++;
+    }
+    
+    NodeT R = S;
+    
+    cout << "\tDanh Sach Thuoc" << endl;
+    cout << left << setw(5) << "STT" << setw(15) << "Ma" << setw(20) << "Ten" 
+         << setw(10) << "Gia" << setw(10) << "So luong" << setw(15) << "Thanh tien" << endl;
+    
+    for (int i = 1; i <= n; i++) {
+        cout << left << setw(5) << i << setw(15) << R->T.Ma_thuoc 
+             << setw(20) << R->T.Ten_thuoc << setw(10) << R->T.Gia_thuoc 
+             << setw(10) << R->T.so_luong << setw(15) << tonggiaT(R->T) << endl;
+        R = R->nextT;
+    }
+    cout << "Tong Tien thuoc la: " << sumT(S) << endl;
 }

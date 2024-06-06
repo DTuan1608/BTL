@@ -35,4 +35,5 @@ void NhapT(DSThuoc &T);
 long tonggiaT(THUOC S);
 long sumT(DSThuoc S);
 void printfT(DSThuoc S);
+void printfT1(DSThuoc S);
 #endif 

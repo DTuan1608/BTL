@@ -158,6 +158,7 @@ void printfDV(DSDV S) {
         }
         cout << endl;
     }
+    cout << "Tong tien dich vu la: " << SumDV(S) << endl;
 }
 //Chọn dịch vụ
 Dich_vu Select_Service(DSDV dsdv){

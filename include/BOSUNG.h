@@ -33,7 +33,8 @@ struct NODEHD{
 typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
-HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst);
+HDNODE Creat_hoa_don_dich_vu(DSDV dsdv);
+HDNODE Creat_hoa_don_thuoc(DSThuoc dst, DSHD dshd);
 void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD);
 HDNODE find_Hoadon(DSHD dshd, string ma_hd);
 void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv);
