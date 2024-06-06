@@ -2,67 +2,153 @@
 #include "BOSUNG.h"
 
 using namespace std;
-
-void Init_Hoadon(DSHD &dshd){
-    dshd->HD.DVBN = NULL;
-    dshd->HD.TBN = NULL;
+//Tạo node hóa đơn.
+HDNODE Creat_hoa_don_dich_vu(DSDV dsdv){
+    HDNODE P = new NODEHD;
+    cout << "Nhap ma hoa don" << endl;
+    cin >> P->HD.Ma_HD;
+    cout << "Nhap ngay/Thang/Nam" << endl;
+    cin >> P->HD.dd; cout << "/" ; cin >> P->HD.mm; cout << "/"; cin >> P->HD.yy;
+    DVNODE Dichvu = NULL;
+    P->HD.DVBN = NULL;
+    addServiceToInvoice(P->HD, Dichvu, dsdv);
+    P->nextHD = NULL;
+    return P;
 }
-void Insert_Hoadon(Benh_nhan BN1, DSHD &dshd, Hoa_don HDM){
-    InsertDSDV_Hoadon(BN1, HDM.DVBN);
+HDNODE Creat_hoa_don_thuoc(DSThuoc dst){
+    HDNODE P = new NODEHD;
+    cout << "Nhap ma hoa don" << endl;
+    cin >> P->HD.Ma_HD;
+    cout << "Nhap ngay/Thang/Nam" << endl;
+    cin >> P->HD.dd; cout << "/" ; cin >> P->HD.mm; cout << "/"; cin >> P->HD.yy;
+    NodeT Thuoc = NULL;
+    P->HD.TBN = NULL;
+    addMedicineToInvoice(P->HD, Thuoc, dst);
+    P->nextHD = NULL;
+    return P;
 }
-void InsertDST_Hoadon(Benh_nhan A, DSThuoc dst){
+//Thêm hóa đơn cho bệnh nhân.
+void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD){
+    if (BN->Hoa_don == NULL) {
+        BN->Hoa_don = HD;
+    } else {
+        HDNODE temp = BN->Hoa_don;
+        while (temp->nextHD != nullptr) {
+            temp = temp->nextHD;
+        }
+        temp->nextHD = HD;
+    }
+}
+//Tìm hóa đơn
+HDNODE find_Hoadon(DSHD dshd, string ma_hd) {
+    HDNODE temp = dshd;
+    while (temp != nullptr) {
+        if (temp->HD.Ma_HD == ma_hd) {
+            return temp;
+        }
+        temp = temp->nextHD;
+    }
+    return nullptr;
+}
+//Thêm dịch vụ cho hóa đơn
+void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
+    DisplayDV(dsdv);
     int x;
+    DVNODE Dichvu;
     do{
-        THUOC T = Select_Medicine(dst);
-        InsertT_nhap(A.Hoa_don->HD.TBN, T);
-        cout << "Ban co muon chon thuoc tiep khong?" << endl;
-        cout << "1. Co          0. Khong" << endl;
-        cout << "Ban chon: ";
+        while(true){
+            cout << "Nhap dich vu ban muon chon." << endl; 
+            string name;
+            cin >> name;
+            Dichvu = FindDV(dsdv, name);
+            if(Dichvu != NULL){
+                break;
+            }
+            else cout << "Nhap lai" << endl;
+        }
+        if (hd.DVBN == nullptr) {
+            hd.DVBN = dv;
+        } else {
+            DVNODE temp = hd.DVBN;
+            while (temp->nextDV != nullptr) {
+                temp = temp->nextDV;
+            }
+            temp->nextDV = dv;
+        }
+        cout << "Ban co muon chon them dich vu khong?";
+        cout << "(1. Co , 0.Khong)" << endl;
         cin >> x;
     }while(x);
 }
-
-void InsertDSDV_Hoadon(Benh_nhan A, DSDV dsdv){
+//Thêm thuốc cho hóa đơn
+void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst) {
+    Hien_Thi_Thuoc(dst);
     int x;
     do{
-        Dich_vu DV = Select_Service(dsdv);
-        InsertDV(A.Hoa_don->HD.DVBN, DV);
-        cout << "Ban co muon chon dich vu tiep khong?" << endl;
-        cout << "1. Co          0. Khong" << endl;
-        cout << "Ban chon: ";
+        cout << "Nhap thuoc ban muon chon." << endl; 
+        string Ma_thuoc;
+        cin >> Ma_thuoc;
+        NodeT t = FindT(dst, Ma_thuoc);
+        int Soluong;
+        cout << "Nhap so luong thuoc" << endl;
+        cin >> Soluong;
+        t->T.so_luong = Soluong;
+        if (hd.TBN == nullptr) {
+            hd.TBN = t;
+        } else {
+            NodeT temp = hd.TBN;
+            while (temp->nextT != nullptr) {
+                temp = temp->nextT;
+            }
+            temp->nextT = t;
+        }
+        cout << "Ban co muon chon them thuoc khong?" << endl;
+        cout << "Chon 1. Co hoac 0.Khong" << endl;
         cin >> x;
     }while(x);
 }
+//Hiển thị
 void Hienthi(){
-    cout<<"\n\tChon cac chuc nang"<<endl;
-    cout<<"1. Benh nhan"<<endl;
-    cout<<"2. DSDV"<<endl;
-    cout<<"3. DSBS"<<endl;
-    cout<<"4. DS Thuoc"<<endl;\
+    cout << "\n\t Chon cac chuc nang " << endl;
+    cout << "1. Benh nhan" << endl;
+    cout << "2. Danh sach dich vu" << endl;
+    cout << "3. Danh sach bac si" << endl;
+    cout << "4. Danh sach thuoc" << endl;
     return;
 }
 void Hienthi1(){
     cout << "\n\tChon cac thao tac" << endl;
     cout << "1. Nhap thong tin benh nhan" << endl;
     cout << "2. Sua thong tin benh nhan" << endl;
-    cout << "3. Chon thuoc cho benh nhan" << endl;
-    cout << "4. Chon dich vu cho benh nhan" << endl;
-    cout << "5. In ra thong tin benh nhan" << endl;
+    cout << "3. Tao hoa don cho benh nhan" << endl;
+    cout << "4. In ra thong tin benh nhan" << endl;
+    //cout << "5. In ra hoa don cua benh nhan" << endl;
     return;
+}
+void Hienthihoadon(){
+    cout << "\n\tChon thao tac" << endl;
+    cout << "1.Nhap dich vu cho benh nhan" << endl;
+    cout << "2.Nhap thuoc cho benh nhan" << endl;
 }
 void Hienthi2(){
     cout<<"\n\tChon cac thao tac"<<endl;
-    cout<<"1. Xem DS dich vu"<<endl;
+    cout<<"1. Xem danh sach dich vu"<<endl;
     cout<<"2. Nhap them dich vu "<<endl;
     return;
 }
 void Hienthi3(){
     cout<<"\n\tChon cac thao tac"<<endl;
-    cout<<"1. Xem DS bac si"<<endl;
+    cout<<"1. Xem Danh sach bac si"<<endl;
     cout<<"2. Nhap them bac si(Private)"<<endl;
     return;
 }
-void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs){
+void Hienthi4(){
+    cout<<"\n\tChon cac thao tac"<<endl;
+    cout<<"1. Xem danh sach thuoc"<<endl;
+    cout<<"2. Nhap them thuoc"<<endl;
+    return;
+}
+void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
     int x;
     do{
         Hienthi();
@@ -77,18 +163,32 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs){
                     case 2: SuaxoaBN(dsbn);break;
                     case 3:{
                         string cccd;
-                        cout << "Nhap ma cccd Benh nhan: ";
-                        cin >> cccd;
-                        InsertDST_Hoadon(FindBN(dsbn, cccd)->BN, T);
+                        int x;
+                        NodeT Thuoc = NULL;
+                        DVNODE Dichvu = NULL;
+                        BNNODE P;
+                        do{
+                            cout <<"Vui long nhap ma cccd cua benh nhan: ";
+                            cin >> cccd;
+                            P = FindBN(dsbn, cccd);
+                        }while(P == NULL);
+                        Hienthihoadon();
+                        cin>>x;
+                        switch(x){
+                            case 1:{
+                                HDNODE Q = Creat_hoa_don_dich_vu(dsdv);
+                                add_HoaDon_to_Benhnhan(P, Q);
+                                break;
+                            }
+                            case 2:{
+                                HDNODE Q = Creat_hoa_don_thuoc(T);
+                                add_HoaDon_to_Benhnhan(P, Q);
+                                break;
+                            }
+                        }
                         break;
                     }
-                    case 4:{
-                        string cccd;
-                        cout << "Nhap ma cccd Benh nhan: ";
-                        cin >> cccd; 
-                        InsertDSDV_Hoadon(FindBN(dsbn, cccd)->BN, dsdv);break;
-                    }
-                    case 5: printfBN(dsbn);break;
+                    case 4: PrintfBN2(dsbn);break;
                 }
                 break;
             }
@@ -111,7 +211,16 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs){
                     case 2:InsertBS(dsbs);break;
                 }
             }
-            case 4:printfT(T);break;
+            case 4:{
+                int y;
+                Hienthi4();
+                cin >> y;
+                switch(y){
+                    case 1:printfT(T);break;
+                    case 2:NhapT(T);break;
+                }
+                break;
+            }
         }
     } while(1);
 }

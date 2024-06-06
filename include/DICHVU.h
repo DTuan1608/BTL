@@ -25,7 +25,7 @@ typedef NODEDV* DSDV;
 void InitDV(DSDV& dsdv);
 int emptyDV(DSDV S);
 DVNODE makenodeDV(Dich_vu T1);
-Dich_vu FindDV(DSDV S, string name);
+DVNODE FindDV(DSDV S, string name);
 void DeleteDV(DSDV& S, string name);
 void InsertDV(DSDV &dsdv, Dich_vu DV);
 void FixDV(DSDV& S, string name, long newPrice);

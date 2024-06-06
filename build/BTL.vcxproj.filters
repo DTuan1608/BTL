@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\BIGASSIGNMENT\src\Bac_si.cpp">
+    <ClCompile Include="C:\BTL\BTL\src\Bac_si.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\BIGASSIGNMENT\src\Benh_nhan.cpp">
+    <ClCompile Include="C:\BTL\BTL\src\Benh_nhan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\BIGASSIGNMENT\src\Bo_sung.cpp">
+    <ClCompile Include="C:\BTL\BTL\src\Bo_sung.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\BIGASSIGNMENT\src\Dich_vu.cpp">
+    <ClCompile Include="C:\BTL\BTL\src\Dich_vu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\BIGASSIGNMENT\src\Thuoc.cpp">
+    <ClCompile Include="C:\BTL\BTL\src\Thuoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\BIGASSIGNMENT\main.cpp">
+    <ClCompile Include="C:\BTL\BTL\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\BIGASSIGNMENT\CMakeLists.txt" />
+    <CustomBuild Include="C:\BTL\BTL\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{4C004E1D-7932-3CEF-891B-1C9D25700B62}</UniqueIdentifier>
+      <UniqueIdentifier>{C3C6EFC9-474F-32C0-905C-AECA2DD83E54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -21,18 +21,15 @@ DVNODE makenodeDV(Dich_vu T1) {
     return node;
 }
 //Tiềm kiếm dịch vụ theo tên DV
-Dich_vu FindDV(DSDV S, string name) {
+DVNODE FindDV(DSDV S, string name) {
     DVNODE p = S;
     while (p != NULL) {
         if(p->DV.Ten_DV == name){
-            return p->DV;
+            return p;
         }
         p = p->nextDV;
     }
-    Dich_vu Q;
-    Q.Ten_DV = "";
-    Q.Gia_DV = 0;
-    return Q;
+    return NULL;
 }
 //Xóa dịch vụ khỏi danh sách
 void DeleteDV(DSDV& S, string name) {
@@ -40,8 +37,7 @@ void DeleteDV(DSDV& S, string name) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    Dich_vu Q = FindDV(S, name);
-    DVNODE P = makenodeDV(Q);
+    DVNODE P = FindDV(S, name);
     if (P == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;
@@ -81,8 +77,7 @@ void FixDV(DSDV& S, string name, long newPrice) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    Dich_vu Q = FindDV(S, name);
-    DVNODE p = makenodeDV(Q);
+    DVNODE p = FindDV(S, name);
     if (p == NULL) {
         cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
         return;
@@ -101,7 +96,7 @@ void NhapDichVu(DSDV& S) {
         cout << "Nhap gia dich vu: ";
         cin >> DV.Gia_DV;
         InsertDV(S, DV);
-        cout << "0. Khong, 1. Nhap tiep: ";
+        cout << "Ban co muon nhap tiep khong (0. Khong, 1. Nhap tiep )" << endl;
         cin >> x;
         while (x != 1 && x != 0) {
             cout << "Nhap lai: ";
@@ -139,18 +134,16 @@ void printfDV(DSDV S) {
     }
     S->TongtienDV = SumDV(S);
     int n = 0;
-    DSDV P = S;
+    DVNODE P = S;
     while (P != NULL) {
         P = P->nextDV;
         n++;
     }
-    DSDV R = S;
+    DVNODE R = S;
     string arr[100][3];
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
     arr[0][2] = "Thanh tien";
-
-    // Assigning values to the array
     for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->DV.Ten_DV;
@@ -165,7 +158,6 @@ void printfDV(DSDV S) {
         }
         cout << endl;
     }
-    cout << "Tong tien: " << S->TongtienDV << endl;
 }
 //Chọn dịch vụ
 Dich_vu Select_Service(DSDV dsdv){
@@ -173,6 +165,6 @@ Dich_vu Select_Service(DSDV dsdv){
     cout << "Nhap ten dich vu ban muon chon: ";
     string name;
     cin >> name;
-    Dich_vu k = FindDV(dsdv, name);
-    return k;
+    DVNODE k = FindDV(dsdv, name);
+    return k->DV;
 }

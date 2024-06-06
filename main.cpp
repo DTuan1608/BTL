@@ -5,16 +5,17 @@
 #include "BOSUNG.h"
 
 int main() {
+    DSHD dshd = NULL;
     DSBN dsbn = NULL;
     DSDV dsdv = NULL;
     DSThuoc T = NULL;
     DSBS dsbs = NULL;
-    THUOC T1 = {"Hoang Anh", "141", 1, 1};
-    THUOC T2 = {"Hoang Anh1", "142", 2, 1};
-    THUOC T3 = {"Hoang Anh2", "143", 1, 2};
-    THUOC T4 = {"Hoang Anh3", "144", 2, 1};
-    THUOC T5 = {"Hoang Anh4", "145", 1, 2};
-    THUOC T6 = {"Hoang Anh5", "146", 2, 1};
+    THUOC T1 = {"1Hoang Anh", "141", 1, 1};
+    THUOC T2 = {"2Hoang Anh1", "142", 2, 1};
+    THUOC T3 = {"3Hoang Anh2", "143", 1, 2};
+    THUOC T4 = {"4Hoang Anh3", "144", 2, 1};
+    THUOC T5 = {"5Hoang Anh4", "145", 1, 2};
+    THUOC T6 = {"6Hoang Anh5", "146", 2, 1};
     Bac_si A = {"Hoang Anh","Bac si",10000};
     Bac_si B = {"Tuan","Bac si",10000};
     Bac_si C = {"An" ,"Bac si",10000};
@@ -38,7 +39,6 @@ int main() {
     InsertDV(dsdv, DV3);
     InsertDV(dsdv, DV4);
     InitBN(dsbn);
-    Dapung(dsbn, T, dsdv, dsbs);
-    cout << "Hello worl" << endl;
+    Dapung(dsbn, T, dsdv, dsbs, dshd);
     return 0;
 }

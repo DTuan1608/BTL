@@ -1,4 +1,9 @@
 # CMake generation dependency list for this directory.
+C:/BTL/BTL/CMakeLists.txt
+C:/BTL/BTL/build/CMakeFiles/3.29.3/CMakeCCompiler.cmake
+C:/BTL/BTL/build/CMakeFiles/3.29.3/CMakeCXXCompiler.cmake
+C:/BTL/BTL/build/CMakeFiles/3.29.3/CMakeRCCompiler.cmake
+C:/BTL/BTL/build/CMakeFiles/3.29.3/CMakeSystem.cmake
 C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCCompiler.cmake.in
 C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCCompilerABI.c
 C:/Program Files/CMake/share/cmake-3.29/Modules/CMakeCInformation.cmake
@@ -98,8 +103,3 @@ C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-MSVC-CXX.cmake
 C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows-MSVC.cmake
 C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/Windows.cmake
 C:/Program Files/CMake/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake
-D:/BIGASSIGNMENT/CMakeLists.txt
-D:/BIGASSIGNMENT/build/CMakeFiles/3.29.3/CMakeCCompiler.cmake
-D:/BIGASSIGNMENT/build/CMakeFiles/3.29.3/CMakeCXXCompiler.cmake
-D:/BIGASSIGNMENT/build/CMakeFiles/3.29.3/CMakeRCCompiler.cmake
-D:/BIGASSIGNMENT/build/CMakeFiles/3.29.3/CMakeSystem.cmake

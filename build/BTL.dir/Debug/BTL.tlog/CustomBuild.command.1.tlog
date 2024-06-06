@@ -1,6 +1,6 @@
-^D:\BIGASSIGNMENT\CMAKELISTS.TXT
+^C:\BTL\BTL\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/BIGASSIGNMENT -BD:/BIGASSIGNMENT/build --check-stamp-file D:/BIGASSIGNMENT/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/BTL/BTL -BC:/BTL/BTL/build --check-stamp-file C:/BTL/BTL/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

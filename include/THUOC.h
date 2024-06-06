@@ -37,4 +37,4 @@ long sumT(DSThuoc S);
 void printfT(DSThuoc S);
 THUOC Select_Medicine(DSThuoc dst);
 
-#endif 
+#endif

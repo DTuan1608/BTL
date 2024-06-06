@@ -1,6 +1,6 @@
-^D:\BIGASSIGNMENT\BUILD\CMAKEFILES\3E1600C14BBAB10D390E3BB39103AB3D\GENERATE.STAMP.RULE
+^C:\BTL\BTL\BUILD\CMAKEFILES\D44F4279F97D00DC00E90613B94D1710\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/BIGASSIGNMENT -BD:/BIGASSIGNMENT/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/BIGASSIGNMENT/build/BTL.sln
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/BTL/BTL -BC:/BTL/BTL/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/BTL/BTL/build/BTL.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

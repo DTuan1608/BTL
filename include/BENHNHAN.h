@@ -20,11 +20,11 @@ struct Benh_nhan{
     string CCCD;
     string SDT;
 	int DK, MK, YK; // Ngày bệnh nhân đi khám
-    DSHD Hoa_don;
     int Bao_hiem; 
 };
 struct NODEBN{
 	Benh_nhan BN;
+    DSHD Hoa_don;
 	NODEBN* nextBN;
 };
 typedef NODEBN* BNNODE;
@@ -33,16 +33,15 @@ typedef NODEBN* DSBN;
 //Khai báo nguyên mẫu hàm BN
 void InitBN(DSBN &dsbn);
 int IsEmpty(DSBN dsbn);
-Benh_nhan Create(DSThuoc S,DSDV dsdv);//Tạo 1NODE mới bằng cách nhập từ bàn phím vào
-//void NhapThuoc(Benh_nhan A, DSThuoc S,DSDV dsdv);
-//void InsertDVforBN(Benh_nhan A, DSThuoc T, DSDV DSDV);
+Benh_nhan Create(DSThuoc S,DSDV dsdv);
 void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv);
 BNNODE FindBN(DSBN dsbn,string cccd);
 BNNODE FindBNBefore(DSBN dsbn,string cccd);
 void DeleteBN(DSBN& dsbn, string cccd);
 void FixBN(DSBN& dsbn, string cccd);
 void ArrangeBN(DSBN& dsbn);
-long SumBN(Benh_nhan S);
+long SumBN(BNNODE S);
 void printfBN(DSBN S);
 void SuaxoaBN(DSBN &S);
+void PrintfBN2(DSBN dsbn);
 #endif
