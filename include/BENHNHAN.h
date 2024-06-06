@@ -43,4 +43,5 @@ void ArrangeBN(DSBN& dsbn);
 long SumBN(BNNODE S);
 void printfBN(DSBN S);
 void SuaxoaBN(DSBN &S);
+void printfBN2(DSBN dsbn);
 #endif

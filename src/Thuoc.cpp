@@ -7,7 +7,6 @@ using namespace std;
 //Khởi tạo danh sách thuốc
 void InitT(DSThuoc &T){
     T = NULL;
-    T->TongtienT = 0;
 }
 //Kiểm tra danh sách trống
 int emptyT(DSThuoc T) {
@@ -103,7 +102,6 @@ void hienThiDanhSachThuoc(DSThuoc danhSachThuoc) {
         temp = temp->nextT;
     }
 }
-
 //Nhập Thuốc
 void NhapT(DSThuoc& S){
     cout << "------------NHAP THUOC-------------\n";

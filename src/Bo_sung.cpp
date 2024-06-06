@@ -3,17 +3,26 @@
 
 using namespace std;
 //Tạo node hóa đơn.
-HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst){
+HDNODE Creat_hoa_don_dich_vu(DSDV dsdv){
     HDNODE P = new NODEHD;
     cout << "Nhap ma hoa don" << endl;
     cin >> P->HD.Ma_HD;
     cout << "Nhap ngay/Thang/Nam" << endl;
     cin >> P->HD.dd; cout << "/" ; cin >> P->HD.mm; cout << "/"; cin >> P->HD.yy;
     DVNODE Dichvu = NULL;
-    NodeT Thuoc = NULL;
     P->HD.DVBN = NULL;
-    P->HD.TBN = NULL;
     addServiceToInvoice(P->HD, Dichvu, dsdv);
+    P->nextHD = NULL;
+    return P;
+}
+HDNODE Creat_hoa_don_thuoc(DSThuoc dst){
+    HDNODE P = new NODEHD;
+    cout << "Nhap ma hoa don" << endl;
+    cin >> P->HD.Ma_HD;
+    cout << "Nhap ngay/Thang/Nam" << endl;
+    cin >> P->HD.dd; cout << "/" ; cin >> P->HD.mm; cout << "/"; cin >> P->HD.yy;
+    NodeT Thuoc = NULL;
+    P->HD.TBN = NULL;
     addMedicineToInvoice(P->HD, Thuoc, dst);
     P->nextHD = NULL;
     return P;
@@ -61,8 +70,8 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
                 continue;
             }
         }
-        cout << "Ban co muon chon them dich vu khong?" << endl;
-        cout << "Chon 1. Co hoac 0.Khong" << endl;
+        cout << "Ban co muon chon them dich vu khong?";
+        cout << "( 1. Co , 0.Khong)" << endl;
         cin >> x;
     }while(x);
 }
@@ -113,6 +122,11 @@ void Hienthi1(){
     //cout << "5. In ra hoa don cua benh nhan" << endl;
     return;
 }
+void Hienthihoadon(){
+    cout << "\n\tChon thao tac" << endl;
+    cout << "1.Nhap dich vu cho benh nhan" << endl;
+    cout << "2.Nhap thuoc cho benh nhan" << endl;
+}
 void Hienthi2(){
     cout<<"\n\tChon cac thao tac"<<endl;
     cout<<"1. Xem danh sach dich vu"<<endl;
@@ -146,16 +160,32 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                     case 2: SuaxoaBN(dsbn);break;
                     case 3:{
                         string cccd;
-                        cout << "Nhap ma cccd Benh nhan: ";
-                        cin >> cccd;
+                        int x;
                         NodeT Thuoc = NULL;
                         DVNODE Dichvu = NULL;
-                        BNNODE P = FindBN(dsbn, cccd);
-                        HDNODE Q = Creat_hoa_don(dsdv, T);
-                        add_HoaDon_to_Benhnhan(P, Q);
+                        BNNODE P;
+                        do{
+                            cout <<"Vui long nhap ma cccd cua benh nhan: ";
+                            cin >> cccd;
+                            P = FindBN(dsbn, cccd);
+                        }while(P == NULL);
+                        Hienthihoadon();
+                        cin>>x;
+                        switch(x){
+                            case 1:{
+                                HDNODE Q = Creat_hoa_don_dich_vu(dsdv);
+                                add_HoaDon_to_Benhnhan(P, Q);
+                                break;
+                            }
+                            case 2:{
+                                HDNODE Q = Creat_hoa_don_thuoc(T);
+                                add_HoaDon_to_Benhnhan(P, Q);
+                                break;
+                            }
+                        }
                         break;
                     }
-                    case 4: printfBN(dsbn);break;
+                    case 4: printfBN2(dsbn);break;
                 }
                 break;
             }

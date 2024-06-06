@@ -55,7 +55,7 @@ void DeleteDV(DSDV& S, string name) {
         delete P;
     }
 }
-//Thêm dịch vụ - Dành cho hóa đơn thêm.
+//Thêm dịch vụ
 void InsertDV(DSDV &dsdv, Dich_vu DV) {
     DVNODE P = new NODEDV;
     P->DV = DV;
@@ -97,7 +97,7 @@ void NhapDichVu(DSDV& S) {
         cout << "Nhap gia dich vu: ";
         cin >> DV.Gia_DV;
         InsertDV(S, DV);
-        cout << "0. Khong, 1. Nhap tiep: ";
+        cout << "Ban co muon nhap tiep khong (0. Khong, 1. Nhap tiep )" << endl;
         cin >> x;
         while (x != 1 && x != 0) {
             cout << "Nhap lai: ";
@@ -133,6 +133,7 @@ void printfDV(DSDV S) {
         cout<<"Danh sach dich vu rong"<<endl;
         return;
     }
+    S->TongtienDV = SumDV(S);
     int n = 0;
     DVNODE P = S;
     while (P != NULL) {
@@ -144,20 +145,10 @@ void printfDV(DSDV S) {
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
     arr[0][2] = "Thanh tien";
-    /*for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->DV.Ten_DV;
         arr[i][2] = to_string(R->DV.Gia_DV);
-        R = R->nextDV;
-    }*/
-    int i = 1;
-    while(R->nextDV != NULL){
-        if (i <= n){
-            arr[i][0] = to_string(i);
-            arr[i][1] = R->DV.Ten_DV;
-            arr[i][2] = to_string(R->DV.Gia_DV);
-            i++;
-        }
         R = R->nextDV;
     }
     // Printing the array

@@ -192,6 +192,47 @@ void printfBN(DSBN S) {
     }
     cout << endl;
 }
+void printfBN2(DSBN dsbn){
+    string cccd;
+    BNNODE R = nullptr;
+    do{
+        cout << "Nhap cccd của BN: "; cin >> cccd;
+        R = FindBN(dsbn, cccd);
+        
+    }while (R == NULL);
+    const int numRows = 3;
+    const int numCols = 2;
+    string arr[numRows][numCols];
+        arr[0][0] = "Ho ten: " + R->BN.Ho_tenBN;
+        arr[0][1] = "Gioi tinh: " + R->BN.Gioi_tinh;
+        arr[1][0] = "Tuoi: " + to_string(R->BN.Tuoi);
+        arr[1][1] = "CCCD: " + R->BN.CCCD;
+        arr[2][0] = "SDT: " + R->BN.SDT;
+        arr[2][1] = "Que: " + R->BN.Que;
+
+        for (int j = 0; j < numRows; j++) {
+            for (int k = 0; k < numCols; k++) {
+                cout << arr[j][k] << "\t";
+            }
+            cout << endl;
+        }
+        cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
+        cout << "\tDanh Sach Dich Vu\n";
+        if(R->Hoa_don->HD.DVBN == NULL){
+            cout << "Khong co dich vu duoc chon" << endl;
+        }
+        else printfDV(R->Hoa_don->HD.DVBN);
+        if(R->Hoa_don->HD.TBN == NULL) {
+           cout << "Danh sach thuoc cua benh nhan rong.";
+        }
+        else printfT(R->Hoa_don->HD.TBN);
+        cout << "Tong vien phi: " << SumBN(R) << endl;
+        if(R->BN.Bao_hiem == 1){
+        	cout << "Phai tra: " << (SumBN(R)*60)/100;
+		}else{
+			cout << "Phai tra: " << SumBN(R);
+		}
+}
 //Sửa - xóa Bệnh nhân.
 void SuaxoaBN(DSBN &S){
     int check ;
