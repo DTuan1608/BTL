@@ -226,7 +226,7 @@ void printfBN2(DSBN dsbn){
            cout << "Danh sach thuoc cua benh nhan rong.";
         }
         else printfT1(R->Hoa_don->HD.TBN);
-        int totalCost = SumBN(R->Hoa_don->HD.DVBN, R->Hoa_don->HD.TBN);
+        long totalCost = sumT(R->Hoa_don->HD.TBN) + SumDV(R->Hoa_don->HD.DVBN);
         cout << "Tong vien phi: " << totalCost << endl;
         if (R->BN.Bao_hiem) {
             cout << "Phai tra: " << (totalCost * 60) / 100 << endl;
