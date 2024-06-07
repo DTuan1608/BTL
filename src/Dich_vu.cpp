@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "DICHVU.h"
 #include "BOSUNG.h"
 
@@ -107,14 +108,15 @@ void NhapDichVu(DSDV& S) {
 }
 //Hiển thị danh sách dịch vụ
 void DisplayDV(DSDV S) {
-    if (emptyDV(S)) {
-        cout << "Danh Sach Rong" << endl;
-        return;
-    }
-    DVNODE p = S;
-    while (p != NULL) {
-        cout << "Ten dich vu: " << p->DV.Ten_DV << ", Gia dich vu: " << p->DV.Gia_DV << endl;
-        p = p->nextDV;
+    cout << left << setw(20) << "Ten dich vu" 
+         << setw(20) << "Gia dich vu" 
+         << endl;
+    DVNODE temp = S;
+    while (temp != nullptr) {
+        cout << left << setw(25) << temp->DV.Ten_DV
+             << setw(10) << temp->DV.Gia_DV
+             << endl;
+        temp = temp->nextDV;
     }
 }
 //Tính tổng tiền dịch vụ bệnh nhân sử dụng

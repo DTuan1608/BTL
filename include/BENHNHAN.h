@@ -19,7 +19,6 @@ struct Benh_nhan{
     string Que;
     string CCCD;
     string SDT;
-	int DK, MK, YK; // Ngày bệnh nhân đi khám
     int Bao_hiem; 
 };
 struct NODEBN{
