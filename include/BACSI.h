@@ -28,7 +28,7 @@ void InitBS(DSBS& H);
 void InsertBSS(DSBS &H, Bac_si K);
 void InsertBS(DSBS &H);
 void DeleteBS(DSBS &H, string hotenBS);
-BSNODE FINDBS(DSBS &H, string MS);
+BSNODE FINDBS(DSBS H, string hotenBS);
 void FixBS(DSBS &H, BSNODE BSBF, BSNODE BSAF) ;
 void PrintBS(DSBS &H);
 #endif 

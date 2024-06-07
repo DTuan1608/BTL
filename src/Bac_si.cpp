@@ -88,9 +88,7 @@ void DeleteBS(DSBS &H, string hotenBS) {
 }
 
 // FindBS(......)
-BSNODE FINDBS(DSBS &H, string hotenBS) {
-    cout << "Nhap ten Bac si ban muon thuc hien thao tac: ";
-    cin >> hotenBS;
+BSNODE FINDBS(DSBS H, string hotenBS) {
     BSNODE Q = H;
     while (Q->nextBS != NULL) {
         if (Q->BS.Ho_tenBS == hotenBS) {
@@ -116,9 +114,8 @@ void PrintBS(DSBS &H) {
     if (H == NULL) {
         cout << "Khong co gi de in ra man hinh" << endl;
     } else {
-        cout<<"\n----------Danh sach Bac si-----------"<<endl;
         BSNODE Q = H;
-        while (Q->nextBS != NULL) {
+        while (Q != NULL) {
             cout << "Ho ten BS: " << Q->BS.Ho_tenBS << endl;
             cout << "Chuc vu: " << Q->BS.Chuc_vu << endl;
             cout << "Gia kham: " << Q->BS.Gia_kham << endl;

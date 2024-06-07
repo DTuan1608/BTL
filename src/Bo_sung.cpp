@@ -3,7 +3,7 @@
 
 using namespace std;
 //Tạo node hóa đơn.
-HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst){
+HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs){
     HDNODE P = new NODEHD;
     cout << "Nhap ma hoa don" << endl;
     cin >> P->HD.Ma_HD;
@@ -13,10 +13,32 @@ HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst){
     P->HD.DVBN = NULL;
     NodeT Thuoc = NULL;
     P->HD.TBN = NULL;
+    BSNODE Bacsi = NULL;
+    P->HD.BSBN = NULL;
     addServiceToInvoice(P->HD, Dichvu, dsdv);
+    addDoctortoInvoice(P->HD, Bacsi, dsbs);
     addMedicineToInvoice(P->HD, Thuoc, dst);
     P->nextHD = NULL;
     return P;
+}
+void addDoctortoInvoice(Hoa_don& hd, BSNODE bs, DSBS dsbs){
+    PrintBS(dsbs);
+    int x;
+    BSNODE Bacsi;
+    while(true){
+        cout << "Nhap ten bac si ban muon chon." << endl; 
+        string name;
+        getline(cin, name);
+        Bacsi = FINDBS(dsbs, name);
+        if(Bacsi != NULL){
+            InsertBSS(hd.BSBN, Bacsi->BS);
+            break;
+        }
+        else {
+            cout << "Bac si ban chon khong co, moi ban nhap lai. " << endl;
+            continue;
+        }
+    }
 }
 //Thêm hóa đơn cho bệnh nhân.
 void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD){
@@ -170,7 +192,7 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                             cin >> cccd;
                             P = FindBN(dsbn, cccd);
                         }while(P == NULL);
-                        HDNODE Q = Creat_hoa_don(dsdv, T);
+                        HDNODE Q = Creat_hoa_don(dsdv, T, dsbs);
                         add_HoaDon_to_Benhnhan(P, Q);
                         break;
                     }

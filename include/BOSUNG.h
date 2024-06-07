@@ -25,6 +25,7 @@ struct Hoa_don{
     int dd, mm, yy;
     DSDV DVBN;
     DSThuoc TBN;
+    DSBS BSBN;
 };
 struct NODEHD{
     Hoa_don HD;
@@ -33,12 +34,12 @@ struct NODEHD{
 typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
-HDNODE Creat_hoa_don_dich_vu(DSDV dsdv);
-HDNODE Creat_hoa_don_thuoc(DSThuoc dst, DSHD dshd);
+HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs);
 void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD);
 HDNODE find_Hoadon(DSHD dshd, string ma_hd);
 void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv);
 void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst);
+void addDoctortoInvoice(Hoa_don& hd, BSNODE bs, DSBS dsbs);
 void Hienthi();//Các dánh sách quan lý
 void Hienthi1();//Các thao tác đối với danh sách
 void Hienthi2();

@@ -222,11 +222,16 @@ void printfBN2(DSBN dsbn){
             cout << "Khong co dich vu duoc chon" << endl;
         }
         else printfDV(R->Hoa_don->HD.DVBN);
+        cout << "\tDanh Sach Bac Si\n";
+        if(R->Hoa_don->HD.BSBN == NULL){
+            cout << "Khong co bac si duoc chon" << endl;
+        }
+        else PrintBS(R->Hoa_don->HD.BSBN);
         if(R->Hoa_don->HD.TBN == NULL) {
            cout << "Danh sach thuoc cua benh nhan rong.";
         }
         else printfT1(R->Hoa_don->HD.TBN);
-        long totalCost = sumT(R->Hoa_don->HD.TBN) + SumDV(R->Hoa_don->HD.DVBN);
+        long totalCost = sumT(R->Hoa_don->HD.TBN) + SumDV(R->Hoa_don->HD.DVBN) + R->Hoa_don->HD.BSBN->BS.Gia_kham;
         cout << "Tong vien phi: " << totalCost << endl;
         if (R->BN.Bao_hiem) {
             cout << "Phai tra: " << (totalCost * 60) / 100 << endl;
