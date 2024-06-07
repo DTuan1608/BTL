@@ -30,11 +30,10 @@ void DeleteT(DSThuoc& T, string Ma_thuoc);
 void FixT(DSThuoc T, string Ma_thuoc);
 void InsertT_nhap(DSThuoc& T, THUOC T1);
 long tonggiaT(THUOC);
-void Hien_Thi_Thuoc(DSThuoc Thuoc);
+void hienThiDanhSachThuoc(DSThuoc danhSachThuoc);
 void NhapT(DSThuoc &T);
 long tonggiaT(THUOC S);
 long sumT(DSThuoc S);
 void printfT(DSThuoc S);
-THUOC Select_Medicine(DSThuoc dst);
-
-#endif
+void printfT1(DSThuoc S);
+#endif 

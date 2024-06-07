@@ -27,7 +27,20 @@ void InsertBSS(DSBS &H, Bac_si K) {
         P->nextBS = Q;
     }
 }
-
+void InsertBSS2(DSBS &H, BSNODE Q) {
+    Q->nextBS = NULL;
+    if (H == NULL || H->BS.Ho_tenBS >= Q->BS.Ho_tenBS) {
+        Q->nextBS = H;
+        H = Q;
+    } else {
+        BSNODE P = H;
+        while (P->nextBS != NULL && P->nextBS->BS.Ho_tenBS < Q->BS.Ho_tenBS) {
+            P = P->nextBS;
+        }
+        Q->nextBS = P->nextBS;
+        P->nextBS = Q;
+    }
+}
 // InsertBS(....) & ArrangeBS()
 void InsertBS(DSBS &H) {
     int check;

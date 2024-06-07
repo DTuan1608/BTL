@@ -19,7 +19,6 @@ struct Benh_nhan{
     string Que;
     string CCCD;
     string SDT;
-	int DK, MK, YK; // Ngày bệnh nhân đi khám
     int Bao_hiem; 
 };
 struct NODEBN{
@@ -40,8 +39,8 @@ BNNODE FindBNBefore(DSBN dsbn,string cccd);
 void DeleteBN(DSBN& dsbn, string cccd);
 void FixBN(DSBN& dsbn, string cccd);
 void ArrangeBN(DSBN& dsbn);
-long SumBN(BNNODE S);
+long SumBN(DSDV dsdv, DSThuoc dst);
 void printfBN(DSBN S);
 void SuaxoaBN(DSBN &S);
-void PrintfBN2(DSBN dsbn);
+void printfBN2(DSBN dsbn);
 #endif

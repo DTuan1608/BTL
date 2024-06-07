@@ -33,10 +33,10 @@ struct NODEHD{
 typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
-HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst);
+HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst,DSBS dsbs);
 void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD);
 HDNODE find_Hoadon(DSHD dshd, string ma_hd);
-void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv);
+void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv,DSBS dsbs);
 void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst);
 void Hienthi();//Các dánh sách quan lý
 void Hienthi1();//Các thao tác đối với danh sách

@@ -1,13 +1,31 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "DICHVU.h"
 #include "BOSUNG.h"
 
 using namespace std;
 
+struct Dich_vu {
+    string Ten_DV;
+    long Gia_DV;
+    DSBS BS;
+};
+
+struct NODEDV { 
+    Dich_vu DV;
+    long TongtienDV;
+    NODEDV* nextDV;
+};
+
+typedef NODEDV* DVNODE;
+typedef NODEDV* DSDV;
+
 //Khởi tạo dịch vụ
 void InitDV(DSDV& dsdv){
     dsdv = NULL;
+    dsdv->TongtienDV = 0;
+    dsdv->DV.BS = NULL;
 }
 //Kiểm tra danh sách dịch vụ có trống không?
 int emptyDV(DSDV S) {
@@ -54,11 +72,12 @@ void DeleteDV(DSDV& S, string name) {
         delete P;
     }
 }
-//Thêm dịch vụ - Dành cho hóa đơn thêm.
+//Thêm dịch vụ
 void InsertDV(DSDV &dsdv, Dich_vu DV) {
     DVNODE P = new NODEDV;
     P->DV = DV;
     P->nextDV = NULL;
+    P->DV.BS = NULL;
     if (dsdv == NULL || dsdv->DV.Ten_DV >= P->DV.Ten_DV) {
         P->nextDV = dsdv;
         dsdv = P;
@@ -86,7 +105,7 @@ void FixDV(DSDV& S, string name, long newPrice) {
     cout << "Da thay doi gia dich vu." << endl;
 }
 //Nhập dịch vụ và thêm dịch vụ
-void NhapDichVu(DSDV& S) {
+void NhapDichVu(DSDV& S,DSBS dsbs) {
     int x = 1;
     while (x == 1) {
         cin.ignore();
@@ -95,6 +114,22 @@ void NhapDichVu(DSDV& S) {
         getline(cin, DV.Ten_DV);
         cout << "Nhap gia dich vu: ";
         cin >> DV.Gia_DV;
+        cout <<"\n\tChon cac BS tuc truc cho dich vu"<<endl;
+        PrintBS(dsbs);
+        int y;
+        do{
+            string name;
+            BSNODE P;
+            do{    
+                cout << "Nhap ma so bac si muon them: ";
+                cin.ignore();
+                getline(cin,name);
+                P = FINDBS(dsbs,name);
+            }while(P == NULL);
+            InsertBSS2(DV.BS,P);
+            cout << "Nhap tiep hay khong (1.Co , 0.Khong)"<<endl;
+            cin >> y;
+        }while(y == 1);
         InsertDV(S, DV);
         cout << "Ban co muon nhap tiep khong (0. Khong, 1. Nhap tiep )" << endl;
         cin >> x;
@@ -106,14 +141,15 @@ void NhapDichVu(DSDV& S) {
 }
 //Hiển thị danh sách dịch vụ
 void DisplayDV(DSDV S) {
-    if (emptyDV(S)) {
-        cout << "Danh Sach Rong" << endl;
-        return;
-    }
-    DVNODE p = S;
-    while (p != NULL) {
-        cout << "Ten dich vu: " << p->DV.Ten_DV << ", Gia dich vu: " << p->DV.Gia_DV << endl;
-        p = p->nextDV;
+    cout << left << setw(20) << "Ten dich vu" 
+         << setw(20) << "Gia dich vu" 
+         << endl;
+    DVNODE temp = S;
+    while (temp != nullptr) {
+        cout << left << setw(25) << temp->DV.Ten_DV
+             << setw(10) << temp->DV.Gia_DV
+             << endl;
+        temp = temp->nextDV;
     }
 }
 //Tính tổng tiền dịch vụ bệnh nhân sử dụng
@@ -150,7 +186,6 @@ void printfDV(DSDV S) {
         arr[i][2] = to_string(R->DV.Gia_DV);
         R = R->nextDV;
     }
-
     // Printing the array
     for (int j = 0; j <= n; j++) {
         for (int k = 0; k < 3; k++) {
@@ -158,6 +193,7 @@ void printfDV(DSDV S) {
         }
         cout << endl;
     }
+    cout << "Tong tien dich vu la: " << SumDV(S) << endl;
 }
 //Chọn dịch vụ
 Dich_vu Select_Service(DSDV dsdv){
