@@ -50,7 +50,7 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
         while(true){
             cout << "Nhap dich vu ban muon chon." << endl; 
             string name;
-            cin >> name;
+            getline(cin, name);
             Dichvu = FindDV(dsdv, name);
             if(Dichvu != NULL){
                 InsertDV(hd.DVBN, Dichvu->DV);
