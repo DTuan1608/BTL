@@ -57,7 +57,7 @@ void InsertBS(DSBS &H) {
              Q->nextBS = P->nextBS;
             P->nextBS = Q;
         }
-        cout<<"Tiep tuc nhap tiep khong:(1.Co , 2. Khong)"<<endl;
+        cout<<"Tiep tuc nhap tiep khong:(1.Co , 0. Khong)"<<endl;
         cin >> check;
     }while(check);
 }

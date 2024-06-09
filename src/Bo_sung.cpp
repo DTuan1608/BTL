@@ -213,19 +213,20 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
             case 3:{
                 int y;
                 Hienthi3();
-                cin>>y;
+                cin >> y;
                 switch(y){
-                    case 1:PrintBS(dsbs);break;
-                    case 2:InsertBS(dsbs);break;
+                    case 1: PrintBS(dsbs); break;
+                    case 2: InsertBS(dsbs); break;
                 }
+                break;
             }
             case 4:{
                 int y;
                 Hienthi4();
                 cin >> y;
                 switch(y){
-                    case 1:printfT(T);break;
-                    case 2:NhapT(T);break;
+                    case 1: hienThiDanhSachThuoc(T); break;
+                    case 2: NhapT(T); break;
                 }
                 break;
             }
