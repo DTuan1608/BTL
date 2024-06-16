@@ -63,9 +63,6 @@ void InsertBS(DSBS &H) {
 }
 // DeleteBS(....)
 void DeleteBS(DSBS &H, string hotenBS) {
-    cout << "Nhap ten Bac si can xoa: " << endl;
-    cin.ignore();
-    getline(cin, hotenBS);
     if (H == NULL) {
         cout << "Khong co gi de xoa:" << endl;
         return;
@@ -102,9 +99,9 @@ BSNODE FINDBS(DSBS H, string hotenBS) {
 void FixBS(DSBS &H, BSNODE BSBF, BSNODE BSAF) // BSBF - Bác si tru?c khi s?a, BSAF - Bác si sau khi s?a
 {
     cout << "Nhap thong tin BS sau khi sua" << endl;
-    cin >> BSAF->BS.Ho_tenBS;
+    getline(cin,  BSAF->BS.Ho_tenBS);
     cin.ignore();
-    cin >> BSAF->BS.Chuc_vu;
+    getline(cin, BSAF->BS.Chuc_vu);
     cin.ignore();
     cin >> BSAF->BS.Gia_kham;
     BSBF = BSAF;

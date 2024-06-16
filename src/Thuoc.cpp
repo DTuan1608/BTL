@@ -57,13 +57,12 @@ void FixT(DSThuoc T, string Ma_thuoc) {
         cout << "\tDanh Sach Thuoc Rong" << endl;
         return;
     }
-    NodeT p = FindT(T, Ma_thuoc);
-    if (p == NULL) return;
-
+    NodeT Thuoc1 = new NODET;
+    Thuoc1 = FindT(T, Ma_thuoc);
     long x;
     cout << "Nhap gia thay doi: ";
     cin >> x;
-    p->T.Gia_thuoc = x;
+    Thuoc1->T.Gia_thuoc = x;
     cout << "Da thay doi gia thuoc" << endl;
 }
 //Thêm thuốc dùng cho hàm nhập

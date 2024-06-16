@@ -22,7 +22,7 @@ DVNODE makenodeDV(Dich_vu T1) {
     node->nextDV = NULL;
     return node;
 }
-//Tiềm kiếm dịch vụ theo tên DV
+//Tìm kiếm dịch vụ theo tên DV
 DVNODE FindDV(DSDV S, string name) {
     DVNODE p = S;
     while (p != NULL) {
@@ -74,17 +74,12 @@ void InsertDV(DSDV &dsdv, Dich_vu DV) {
     }
 }
 //Sửa đổi thông tin dịch vụ.
-void FixDV(DSDV& S, string name, long newPrice) {
+void FixDV(DSDV& S, DVNODE P,long newPrice) {
     if (emptyDV(S)) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    DVNODE p = FindDV(S, name);
-    if (p == NULL) {
-        cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
-        return;
-    }
-    p->DV.Gia_DV = newPrice;
+    P->DV.Gia_DV = newPrice;
     cout << "Da thay doi gia dich vu." << endl;
 }
 //Nhập dịch vụ và thêm dịch vụ
@@ -114,7 +109,7 @@ void DisplayDV(DSDV S) {
     DVNODE temp = S;
     while (temp != nullptr) {
         cout << left << setw(25) << temp->DV.Ten_DV
-             << setw(10) << temp->DV.Gia_DV
+             << setw(20) << temp->DV.Gia_DV
              << endl;
         temp = temp->nextDV;
     }

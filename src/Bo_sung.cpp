@@ -152,21 +152,27 @@ void Hienthihoadon(){
     cout << "2.Nhap thuoc cho benh nhan" << endl;
 }
 void Hienthi2(){
-    cout<<"\n\tChon cac thao tac"<<endl;
-    cout<<"1. Xem danh sach dich vu"<<endl;
-    cout<<"2. Nhap them dich vu "<<endl;
+    cout << "\n\tChon cac thao tac" << endl;
+    cout << "1. Xem danh sach dich vu" << endl;
+    cout << "2. Nhap them dich vu " << endl;
+    cout << "3. Sua gia cua dich vu" << endl;
+    cout << "4. Xoa dich vu" << endl;
     return;
 }
 void Hienthi3(){
-    cout<<"\n\tChon cac thao tac"<<endl;
-    cout<<"1. Xem Danh sach bac si"<<endl;
-    cout<<"2. Nhap them bac si(Private)"<<endl;
+    cout << "\n\tChon cac thao tac" << endl;
+    cout << "1. Xem Danh sach bac si" << endl;
+    cout << "2. Nhap them bac si(Private)" << endl;
+    cout << "3. Sua thong tin bac si" << endl;
+    cout << "4. Xoa bac si" << endl;
     return;
 }
 void Hienthi4(){
     cout<<"\n\tChon cac thao tac"<<endl;
     cout<<"1. Xem danh sach thuoc"<<endl;
     cout<<"2. Nhap them thuoc"<<endl;
+    cout << "3. Sua thong tin thuoc" << endl;
+    cout << "4. Xoa thuoc" << endl;
     return;
 }
 void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
@@ -205,8 +211,46 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                 Hienthi2();
                 cin>> y;
                 switch(y){
-                    case 1:printfDV(dsdv);break;
-                    case 2:NhapDichVu(dsdv);break;
+                    case 1: DisplayDV(dsdv);break;
+                    case 2: NhapDichVu(dsdv);break;
+                    case 3: {
+                        DisplayDV(dsdv);
+                        DVNODE P = NULL;
+                        do{
+                            long gia_moi;
+                            cout << "Nhap ten dich vu ban muon sua" << endl;
+                            string name;
+                            cin.ignore();
+                            getline(cin, name);
+                            P = FindDV(dsdv, name);
+                            if(P != NULL){
+                                cout << "Nhap gia moi cua dich vu " << P->DV.Ten_DV << ": ";
+                                cin >> gia_moi;
+                                FixDV(dsdv, P, gia_moi);
+                            }
+                            else cout << "Nhap lai." << endl;
+                            cin.ignore();
+                        }while(P == NULL);
+                        break;
+                    }
+                    case 4:{
+                        DisplayDV(dsdv);
+                        DVNODE P = nullptr;
+                        while(true) {
+                            cout << "Nhap ten dich vu ban muon xoa: ";
+                            string name;
+                            getline(cin, name);
+                            P = FindDV(dsdv, name);
+                            if(P != nullptr) break;
+                            else {
+                                cout << "Nhap lai" << endl;
+                            }
+                        }
+                        if(P != nullptr) {
+                            DeleteDV(dsdv, P->DV.Ten_DV);
+                        }
+                        break;
+                    }
                 }
                 break;
             }
@@ -217,6 +261,40 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                 switch(y){
                     case 1: PrintBS(dsbs); break;
                     case 2: InsertBS(dsbs); break;
+                    case 3: {
+                        PrintBS(dsbs);
+                        BSNODE P = new NODEBS;
+                        while(1){
+                            cout << "Nhap ten bac si can sua" << endl;
+                            string name;
+                            getline(cin, name);
+                            P = FINDBS(dsbs, name);
+                            if(P != NULL) break;
+                            else {
+                                cout << "Nhap lai" << endl;
+                                continue;
+                            }
+                        }
+                        BSNODE Q = new NODEBS;
+                        FixBS(dsbs, P, Q);
+                    }
+                    case 4:{
+                        PrintBS(dsbs);
+                        BSNODE P = new NODEBS;
+                        while(1){
+                            cout << "Nhap ten bac si ban muon xoa: ";
+                            string name;
+                            getline(cin, name);
+                            P = FINDBS(dsbs, name);
+                            if(P != NULL) break;
+                            else {
+                                cout << "Nhap lai" << endl;
+                                continue;
+                            }
+                        }
+                        DeleteDV(dsdv, P->BS.Ho_tenBS);
+                        break;
+                    }
                 }
                 break;
             }
@@ -227,6 +305,40 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                 switch(y){
                     case 1: hienThiDanhSachThuoc(T); break;
                     case 2: NhapT(T); break;
+                    case 3: {
+                        hienThiDanhSachThuoc(T);
+                        NodeT P = new NODET;
+                        string name;
+                        while(1){
+                            cout << "Nhap ma thuoc can sua" << endl;
+                            getline(cin, name);
+                            P = FindT(T, name);
+                            if(P == NULL) cout << "Nhap lai";
+                            else {
+                                cout << "Nhap lai" << endl;
+                                continue;
+                            }
+                        }
+                        FixT(T, name);
+                        break;
+                    }
+                    case 4:{
+                        hienThiDanhSachThuoc(T);
+                        DVNODE P = new NODEDV;
+                        string name;
+                        while(1){
+                            cout << "Nhap ma thuoc ban muon xoa: ";
+                            getline(cin, name);
+                            P = FindDV(dsdv, name);
+                            if(P != NULL) break;
+                            else {
+                                cout << "Nhap lai" << endl;
+                                continue;
+                            }
+                        }
+                        DeleteT(T, name);
+                        break;
+                    }
                 }
                 break;
             }
