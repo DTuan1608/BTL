@@ -10,16 +10,18 @@ int main() {
     DSDV dsdv = NULL;
     DSThuoc T = NULL;
     DSBS dsbs = NULL;
-    Bac_si BS1 = {"Nguyen Van A", "Bac si tim mach","TM1", 300000};
-    Bac_si BS2 = {"Nguyen Van B", "Tien si tim mach","TM2", 2000000};
-    Bac_si BS3 = {"Nguyen Van C" , "Bac si nha khoa","NK1", 400000};
-    Bac_si BS4 = {"Nguyen Van D", "Thac si da lieu","DL1", 1000000};
-    Bac_si BS5 = {"Hoang Van A", "Tien si dinh duong","DD1", 2000000};
-    Bac_si BS6 = {"Hoang Van B", "Bac si tai mui hong","TMH1", 200000};
-    Bac_si BS7 = {"Hoang Van C" , "Tien si tai mui hong","TMH2", 1000000};
-    Bac_si BS8 = {"Hoang Van D", "Bac si da lieu","DL2", 200000};
-    Bac_si BS9 = {"Duong Van A" , "Pho giam doc benh vien","1", 4000000};
-    Bac_si BS10 = {"Duong Van B", "Giam doc benh vien","0", 5000000};
+
+    Bac_si BS1 = {"Nguyen Van A", "Bac si tim mach", "TM1", 300000};
+    Bac_si BS2 = {"Nguyen Van B", "Tien si tim mach", "TM2", 2000000};
+    Bac_si BS3 = {"Nguyen Van C" , "Bac si nha khoa", "NK1", 400000};
+    Bac_si BS4 = {"Nguyen Van D", "Thac si da lieu", "DL1", 1000000};
+    Bac_si BS5 = {"Hoang Van A", "Tien si dinh duong", "DD1", 2000000};
+    Bac_si BS6 = {"Hoang Van B", "Bac si tai mui hong", "TMH1", 200000};
+    Bac_si BS7 = {"Hoang Van C" , "Tien si tai mui hong", "TMH2", 1000000};
+    Bac_si BS8 = {"Hoang Van D", "Bac si da lieu", "DL2", 200000};
+    Bac_si BS9 = {"Duong Van A" , "Pho giam doc benh vien", "PGD", 4000000};
+    Bac_si BS10 = {"Duong Van B", "Giam doc benh vien", "GD", 5000000};
+    
     THUOC T1 = {"Thuoc da lieu", "DL01", 20000, 1000};
     THUOC T2 = {"Thuoc nha khoa", "NK01", 30000, 1000};
     THUOC T3 = {"Thuoc tim mach", "TM01", 50000, 1000};
@@ -30,6 +32,7 @@ int main() {
     THUOC T8 = {"Hop chi nha khoa", "NK02", 40000, 1000};
     THUOC T9 = {"Thuoc bo sung Sat", "DD02", 100000, 1000};
     THUOC T10 = {"Thuoc chua dau tim", "TM02", 100000, 1000};
+
     Dich_vu DV1 = {"Kham tai - mui - hong", "TMH", 800000};
     Dich_vu DV2 = {"Kham da lieu", "DL",500000};
     Dich_vu DV3 = {"Sieu am", "SA",100000};
@@ -40,6 +43,7 @@ int main() {
     Dich_vu DV8 = {"Kham dinh duong", "DD", 700000};
     Dich_vu DV9 = {"Xet nghiem mau", "XNM", 200000};
     Dich_vu DV10 = {"Kham nha khoa", "NK", 400000};
+    
     //Tạo danh sách bác sĩ
     InsertBSS(dsbs, BS1);
     InsertBSS(dsbs, BS2);

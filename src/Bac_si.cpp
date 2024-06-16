@@ -10,7 +10,6 @@ using namespace std;
 void InitBS(DSBS &H) {
     H = NULL;
 }
-
 // Thêm Bác sĩ tạo danh sách
 void InsertBSS(DSBS &H, Bac_si K) {
     BSNODE Q = new NODEBS;
@@ -28,21 +27,20 @@ void InsertBSS(DSBS &H, Bac_si K) {
         P->nextBS = Q;
     }
 }
-
-// InsertBS(....) & ArrangeBS()
+//Thêm bác sĩ bằng cách nhập và sắp xếp bác sĩ
 void InsertBS(DSBS &H) {
     int check;
     do{
         Bac_si k;
         cin.ignore();
         cout << "\tNhap thong tin bac si can them nhu sau:" << endl;
-        cout << "Ho ten BS:";
+        cout << "Ho ten BS: ";
         getline(cin, k.Ho_tenBS);
-        cout << "Chuc vu:";
+        cout << "Chuc vu: ";
         getline(cin, k.Chuc_vu);
-        cout << "Gia kham:";
+        cout << "Gia kham: ";
         cin >> k.Gia_kham;
-        cout << "Ma BS" << endl;
+        cout << "Ma BS: ";
         cin >> k.MaBS;
         cin.ignore();
         BSNODE Q = new NODEBS;
@@ -64,7 +62,7 @@ void InsertBS(DSBS &H) {
         cin >> check;
     }while(check);
 }
-// DeleteBS(....)
+//Xóa bác sĩ không còn công tác
 void DeleteBS(DSBS &H, string hotenBS) {
     if (H == NULL) {
         cout << "Khong co gi de xoa:" << endl;
@@ -86,8 +84,7 @@ void DeleteBS(DSBS &H, string hotenBS) {
         }
     }
 }
-
-// FindBS(......)
+//Tìm kiếm bác sĩ theo tên
 BSNODE FINDBS(DSBS H, string hotenBS) {
     BSNODE Q = H;
     while (Q != NULL) {
@@ -98,6 +95,7 @@ BSNODE FINDBS(DSBS H, string hotenBS) {
     }
     return NULL;
 }
+//Tìm kiếm bác sĩ theo mã
 BSNODE FINDBS1(DSBS H, string maBS) {
     BSNODE Q = H;
     while (Q != NULL) {
@@ -108,6 +106,7 @@ BSNODE FINDBS1(DSBS H, string maBS) {
     }
     return NULL;
 }
+//Chỉnh sửa bác sĩ
 void FixBS(DSBS& dsbs, string maBS) {
     BSNODE P = FINDBS1(dsbs, maBS);
     if (P != NULL) {
@@ -125,9 +124,7 @@ void FixBS(DSBS& dsbs, string maBS) {
         return; 
     }
 }
-
-
-
+//In bác sĩ ra màn hình
 void PrintBS(DSBS H) {
     if (H == nullptr) {
         cout << "Khong co gi de in ra man hinh" << endl;

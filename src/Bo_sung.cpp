@@ -2,12 +2,6 @@
 #include "BOSUNG.h"
 
 using namespace std;
-void InitHD(DSHD &dshd){
-    dshd = NULL;
-    dshd->HD.DVBN = NULL;
-    dshd->HD.BSBN = NULL;
-    dshd->HD.TBN = NULL;
-}
 //Tạo node hóa đơn.
 HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs){
     HDNODE P = new NODEHD;

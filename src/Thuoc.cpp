@@ -51,7 +51,7 @@ void DeleteT(DSThuoc& T, string Ma_thuoc) {
         delete P;
     }
 }
-//Chỉnh sửa thông tin thuốc
+//Chỉnh sửa giá thuốc
 void FixT(DSThuoc T, string Ma_thuoc) {
     if (emptyT(T)) {
         cout << "\tDanh Sach Thuoc Rong" << endl;
@@ -83,7 +83,6 @@ void InsertT_nhap(DSThuoc& T, THUOC T1) {
         }
     }
 }
-
 //Hiển thị danh sách thuốc
 void hienThiDanhSachThuoc(DSThuoc danhSachThuoc) {
     cout << left << setw(10) << "Ma_thuoc" 
@@ -101,7 +100,7 @@ void hienThiDanhSachThuoc(DSThuoc danhSachThuoc) {
         temp = temp->nextT;
     }
 }
-//Nhập Thuốc
+//Nhập Thuốc và thêm vào danh sách
 void NhapT(DSThuoc& S){
     cout << "------------NHAP THUOC-------------\n";
     int x = 1;
@@ -136,7 +135,7 @@ long sumT(DSThuoc S) {
     }
     return total;
 }
-//In thuoc theo danh sách
+//In thuốc theo danh sách có tổng tiền
 void printfT(DSThuoc S) {
     if(S == NULL){
         cout<<"DS Thuoc rong"<<endl;
@@ -174,7 +173,7 @@ void printfT(DSThuoc S) {
     }
     cout << "Tong Tien thuoc la: " << sumT(S);
 }
-
+//In thuốc theo danh sách và có tổng tiền
 void printfT1(DSThuoc S) {
     if (S == NULL) {
         cout << "DS Thuoc rong" << endl;
