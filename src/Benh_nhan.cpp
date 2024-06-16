@@ -43,7 +43,6 @@ BNNODE Create1(DSThuoc S, DSDV dsdv){
     cout << "SDT:";         cin >> Q->BN.SDT;
     cout << "BHYT (1. Co, 0. Khong):" << endl;
     cin >> Q->BN.Bao_hiem;
-    Q->Hoa_don = NULL;
     return Q;
 }
 //Thêm bệnh nhận vào danh sách
