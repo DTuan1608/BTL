@@ -8,6 +8,7 @@ using namespace std;
 
 struct Dich_vu {
     string Ten_DV;
+    string Ma_DV;
     long Gia_DV;
 };
 
@@ -25,13 +26,14 @@ typedef NODEDV* DSDV;
 void InitDV(DSDV& dsdv);
 int emptyDV(DSDV S);
 DVNODE makenodeDV(Dich_vu T1);
-DVNODE FindDV(DSDV S, string name);
-void DeleteDV(DSDV& S, string name);
+DVNODE FindDV(DSDV S, string Ma);
+void DeleteDV(DSDV& S, string Ma);
 void InsertDV(DSDV &dsdv, Dich_vu DV);
 void FixDV(DSDV& S, DVNODE P,long newPrice);
 void NhapDichVu(DSDV& S);
 long SumDV(DSDV S);
 void printfDV(DSDV S);
 void DisplayDV(DSDV S);
-Dich_vu Select_Service(DSDV dsdv);
+void FixDV1(DSDV dsdv);
+void DeleteDV1(DSDV dsdv);
 #endif 

@@ -34,6 +34,7 @@ struct NODEHD{
 typedef NODEHD* DSHD;
 typedef NODEHD* HDNODE;
 
+void InitHD(DSHD &dshd);
 HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs);
 void add_HoaDon_to_Benhnhan(BNNODE BN, HDNODE HD);
 HDNODE find_Hoadon(DSHD dshd, string ma_hd);

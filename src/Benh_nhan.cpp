@@ -56,7 +56,6 @@ void InsertBN(DSBN& dsbn, DSThuoc S,DSDV dsdv) {
         dsbn = P;
         cout << "Ban co muon nhap benh nhan tiep? (1: Co, 0: Khong): ";
         cin >> check;
-        cin.ignore();
     } while (check);    
 }
 // Tim benh nhan voi so cccd cho truoc 
@@ -76,25 +75,38 @@ BNNODE FindBNBefore(DSBN dsbn, string cccd) {
         if (R->nextBN->BN.CCCD == cccd) return R;
         R = R->nextBN;
     }
-    cout << "Khong tim thay BN" << endl;
     return NULL;
 }
 
 // Xoa 1 BN voi so cccd cho truoc 
-void DeleteBN(DSBN& dsbn, string cccd) {
-    BNNODE P = FindBNBefore(dsbn, cccd);
-    BNNODE Q = FindBN(dsbn, cccd);
-    if (P == NULL) return;
-    if (dsbn == Q) dsbn = dsbn->nextBN;
-    P->nextBN = Q->nextBN;
-    delete Q;
-}
+void DeleteBN(DSBN& S, string name) {
+    if (S == NULL) {
+        cout << "Danh Sach Rong" << endl;
+        return;
+    }
+    BNNODE P = FindBN(S, name);
+    if (P == NULL) {
+        cout << "Khong co benh nhan: " << name << " trong danh sach" << endl;
+        return;
+    }
 
+    if (S == P) {
+        S = S->nextBN;
+        delete P;
+    }
+    else {
+        BNNODE R = S;
+        while (R->nextBN != P) R = R->nextBN;
+        R->nextBN = P->nextBN;
+        delete P;
+    }
+}
 // Sua thong tin benh nhan 
 void FixBN(DSBN& dsbn, string cccd) {
     BNNODE P = FindBN(dsbn, cccd);
     
     if (P != NULL) {
+        cin.ignore();
         cout << "\n\tNhap thong tin moi cho benh nhan" << endl;
         cout << "Ho va ten: ";
         getline(cin, P->BN.Ho_tenBN);
@@ -103,6 +115,7 @@ void FixBN(DSBN& dsbn, string cccd) {
         cout << "Gioi tinh: ";
         cin >> P->BN.Gioi_tinh; 
         cout << "Que: ";
+        cin.ignore();
         getline(cin, P->BN.Que);
         cout << "CCCD: ";
         cin >> P->BN.CCCD;
@@ -240,73 +253,50 @@ void printfBN2(DSBN dsbn){
         }
 }
 //Sửa - xóa Bệnh nhân.
-void SuaxoaBN(DSBN &S){
-    int check ;
-    do{
-	    string a;
-	    cout << "Nhap cccd cua BN muon duoc sua: " ; cin >> a;
-	    BNNODE p = NULL;
-	    while(p == NULL){
-		    cout << "Nhap lai cccd: " ; cin >> a;
-		    p = FindBN(S,a);
+void SuaxoaBN(DSBN &dsbn){
+    int x;
+    cout << "\nChon chuc nang" << endl;
+    cout << "1. Sua thong tin benh nhan" << endl;
+    cout << "2. Xoa thong tin benh nhan" << endl;
+    cin >> x;
+
+    switch(x){
+        case 1: {
+            while (true) {
+                string cccd;
+                cout << "Nhap cccd benh nhan muon sua: ";
+                cin >> cccd;
+                BNNODE P = FindBN(dsbn, cccd);
+                if (P == NULL) {
+                    cout << "Khong tim thay benh nhan voi cccd nay. Vui long thu lai." << endl;
+                    continue;
+                }
+                FixBN(dsbn, cccd);
+                break;
+            }
+            break;
         }
-	    int x;
-	    cout << "0.Xoa\n1.Thong tin\n2.Dich vu\n3.Thuoc\n";
-	    cin >> x; 
-	    while(x < 0 || x > 3){
-		    cout << "Nhap lai: "; cin >> x;
-	    }
-	    switch(x){
-		    case 0: {
-			    DeleteBN(S,a);
-			    break;
-		    }
-		    case 1:{
-			    FixBN(S,a);
-			    break;
-		    }
-		    case 2:{
-//			cout << "0."
-			    break;
-		    }
-		    case 3:{
-			    int a;
-			    while(a == 1){
-			    string i;
-			    cout << "Nhap ma thuoc: "; cin >> i;
-			    NodeT r = NULL;
-			    while(r == NULL){
-				    cout << "Nhap lai ma: " ; cin >> i;
-				    r = FindT(p->Hoa_don->HD.TBN, i);
-			    }
-			    int y;
-			    cout << "0.Xoa\n1.Sua\n"; cin >> y;
-			    while(y != 0 && y != 1){
-				    cout << "Nhap lai: "; cin >>y;
-		    	}
-			    switch(y){
-			    	case 0:{
-				    	DeleteT(p->Hoa_don->HD.TBN,i);
-				    	break;
-			    	}
-				    case 1:{
-					    FixT(p->Hoa_don->HD.TBN,i);
-				    	break;
-				    }
-			    }
-			    cout << "0.khong\n1.\nSua tiep\n"; cin >> x;
-			    while(x != 0 && x != 1){
-				    cout << "Nhap lai: "; cin >> x;
-			    }
-			    }
-			    break;
-		    }
+        case 2: {
+            while (true) {
+                string cccd;
+                cout << "Nhap cccd benh nhan muon xoa: ";
+                cin >> cccd;
+                BNNODE P = FindBN(dsbn, cccd);
+                if (P == NULL) {
+                    cout << "Khong tim thay benh nhan voi cccd nay. Vui long thu lai." << endl;
+                    continue;
+                } else {
+                    DeleteBN(dsbn, cccd);
+                    cout << "Da xoa benh nhan thanh cong." << endl;
+                    break;
+                }
+            }
+            break;
         }
-        cout << "\n\tThong tin benh nhan sau khi sua:" << endl;
-        printfBN(S);
-        cout << "Co tiep tuc sua nua khong:(1. Co , 2. Khong)"<<endl;
-        cin >> check;
-	} while (check);	
+        default:
+            cout << "Lua chon khong hop le. Vui long thu lai." << endl;
+            break;
+    }
 }
 //Tổng tiền cho bệnh nhân S.
 long SumBN(DSDV dsdv, DSThuoc dst){

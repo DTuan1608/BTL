@@ -23,10 +23,10 @@ DVNODE makenodeDV(Dich_vu T1) {
     return node;
 }
 //Tìm kiếm dịch vụ theo tên DV
-DVNODE FindDV(DSDV S, string name) {
+DVNODE FindDV(DSDV S, string Ma) {
     DVNODE p = S;
     while (p != NULL) {
-        if(p->DV.Ten_DV == name){
+        if(p->DV.Ma_DV == Ma){
             return p;
         }
         p = p->nextDV;
@@ -34,14 +34,14 @@ DVNODE FindDV(DSDV S, string name) {
     return NULL;
 }
 //Xóa dịch vụ khỏi danh sách
-void DeleteDV(DSDV& S, string name) {
+void DeleteDV(DSDV& S, string Ma) {
     if (emptyDV(S)) {
         cout << "Danh Sach Rong" << endl;
         return;
     }
-    DVNODE P = FindDV(S, name);
+    DVNODE P = FindDV(S, Ma);
     if (P == NULL) {
-        cout << "Khong co dich vu: " << name << " trong danh sach" << endl;
+        cout << "Khong co dich vu: " << Ma << " trong danh sach" << endl;
         return;
     }
 
@@ -74,7 +74,7 @@ void InsertDV(DSDV &dsdv, Dich_vu DV) {
     }
 }
 //Sửa đổi thông tin dịch vụ.
-void FixDV(DSDV& S, DVNODE P,long newPrice) {
+void FixDV(DSDV& S, DVNODE P, long newPrice) {
     if (emptyDV(S)) {
         cout << "Danh Sach Rong" << endl;
         return;
@@ -90,6 +90,8 @@ void NhapDichVu(DSDV& S) {
         Dich_vu DV;
         cout << "Nhap ten dich vu: ";
         getline(cin, DV.Ten_DV);
+        cout << "Ma dich vu: ";
+        cin >> DV.Ma_DV;
         cout << "Nhap gia dich vu: ";
         cin >> DV.Gia_DV;
         InsertDV(S, DV);
@@ -103,13 +105,15 @@ void NhapDichVu(DSDV& S) {
 }
 //Hiển thị danh sách dịch vụ
 void DisplayDV(DSDV S) {
-    cout << left << setw(20) << "Ten dich vu" 
-         << setw(20) << "Gia dich vu" 
+    cout << left << setw(30) << "Ten dich vu" 
+         << setw(15) << "Ma dich vu" 
+         << setw(10) << "Gia dich vu" 
          << endl;
     DVNODE temp = S;
     while (temp != nullptr) {
-        cout << left << setw(25) << temp->DV.Ten_DV
-             << setw(20) << temp->DV.Gia_DV
+        cout << left << setw(30) << temp->DV.Ten_DV
+             << setw(15) << temp->DV.Ma_DV
+             << setw(10) << temp->DV.Gia_DV
              << endl;
         temp = temp->nextDV;
     }
@@ -126,43 +130,89 @@ long SumDV(DSDV S){
 }
 //In dịch vụ theo danh sách
 void printfDV(DSDV S) {
-     if(S == NULL){
-        cout<<"Danh sach dich vu rong"<<endl;
+    if (emptyDV(S)) {
+        cout << "Danh sach dich vu rong" << endl;
         return;
     }
-    S->TongtienDV = SumDV(S);
     int n = 0;
     DVNODE P = S;
-    while (P != NULL) {
+    while (P != nullptr) {
         P = P->nextDV;
         n++;
     }
-    DVNODE R = S;
-    string arr[100][3];
+    string arr[100][4]; 
     arr[0][0] = "STT";
     arr[0][1] = "Ten";
-    arr[0][2] = "Thanh tien";
+    arr[0][2] = "Ma";
+    arr[0][3] = "Thanh tien";
+    DVNODE R = S;
     for (int i = 1; i <= n; i++) {
         arr[i][0] = to_string(i);
         arr[i][1] = R->DV.Ten_DV;
-        arr[i][2] = to_string(R->DV.Gia_DV);
+        arr[i][2] = R->DV.Ma_DV;
+        arr[i][3] = to_string(R->DV.Gia_DV);
         R = R->nextDV;
     }
-    // Printing the array
     for (int j = 0; j <= n; j++) {
-        for (int k = 0; k < 3; k++) {
-            cout << arr[j][k] << "\t";
+        for (int k = 0; k < 4; k++) {
+            cout << setw(30) << left << arr[j][k];
         }
         cout << endl;
     }
     cout << "Tong tien dich vu la: " << SumDV(S) << endl;
 }
-//Chọn dịch vụ
-Dich_vu Select_Service(DSDV dsdv){
+void DeleteDV1(DSDV dsdv){
     DisplayDV(dsdv);
-    cout << "Nhap ten dich vu ban muon chon: ";
+    int x;
+    DVNODE Dichvu;
     string name;
-    cin >> name;
-    DVNODE k = FindDV(dsdv, name);
-    return k->DV;
+    do{
+        while(true){
+            cout << "Nhap ma dich vu ban muon xoa." << endl; 
+            cin >> name;
+            Dichvu = FindDV(dsdv, name);
+            if(Dichvu != NULL){
+                cout << "Ban se sua dich vu sau: " << Dichvu->DV.Ten_DV << " co gia " << Dichvu->DV.Gia_DV << endl;
+                break;
+            }
+            else {
+                cout << "Dich vu ban muon sua khong co, moi ban nhap lai. " << endl;
+                continue;
+            }
+        }
+        DeleteDV(dsdv, name);
+        cout << "Da xoa thanh cong dich vu co ma: " << name << endl;
+        cout << "Ban co muon xoa dich vu tiep khong?";
+        cout << "( 1. Co , 0.Khong)" << endl;
+        cin >> x;
+    }while(x);
+}
+
+void FixDV1(DSDV dsdv) {
+    DisplayDV(dsdv);
+    int x;
+    DVNODE Dichvu;
+    long gia_moi;
+    do{
+        while(true){
+            cout << "Nhap ma dich vu ban muon sua." << endl; 
+            string name;
+            cin >> name;
+            Dichvu = FindDV(dsdv, name);
+            if(Dichvu != NULL){
+                cout << "Ban se sua dich vu sau: " << Dichvu->DV.Ten_DV << " co gia " << Dichvu->DV.Gia_DV << endl;
+                cout << "Gia moi cua dich vu: ";
+                cin >> gia_moi;
+                FixDV(dsdv, Dichvu, gia_moi);
+                break;
+            }
+            else {
+                cout << "Dich vu ban muon sua khong co, moi ban nhap lai. " << endl;
+                continue;
+            }
+        }
+        cout << "Ban co muon sua dich vu tiep khong?";
+        cout << "( 1. Co , 0.Khong)" << endl;
+        cin >> x;
+    }while(x);
 }

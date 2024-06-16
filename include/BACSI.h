@@ -11,6 +11,7 @@
 struct Bac_si {
     string Ho_tenBS;
     string Chuc_vu;
+    string MaBS;
     long Gia_kham;
 };
 
@@ -29,6 +30,7 @@ void InsertBSS(DSBS &H, Bac_si K);
 void InsertBS(DSBS &H);
 void DeleteBS(DSBS &H, string hotenBS);
 BSNODE FINDBS(DSBS H, string hotenBS);
-void FixBS(DSBS &H, BSNODE BSBF, BSNODE BSAF) ;
-void PrintBS(DSBS &H);
+BSNODE FINDBS1(DSBS H, string maBS);
+void FixBS(DSBS &H, string maBS) ;
+void PrintBS(DSBS H);
 #endif 

@@ -1,6 +1,7 @@
 //Dương Đức Tuấn
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "BACSI.h"
 
 using namespace std;
@@ -41,6 +42,8 @@ void InsertBS(DSBS &H) {
         getline(cin, k.Chuc_vu);
         cout << "Gia kham:";
         cin >> k.Gia_kham;
+        cout << "Ma BS" << endl;
+        cin >> k.MaBS;
         cin.ignore();
         BSNODE Q = new NODEBS;
         Q->BS = k;
@@ -87,7 +90,7 @@ void DeleteBS(DSBS &H, string hotenBS) {
 // FindBS(......)
 BSNODE FINDBS(DSBS H, string hotenBS) {
     BSNODE Q = H;
-    while (Q->nextBS != NULL) {
+    while (Q != NULL) {
         if (Q->BS.Ho_tenBS == hotenBS) {
             return Q;
         }
@@ -95,27 +98,52 @@ BSNODE FINDBS(DSBS H, string hotenBS) {
     }
     return NULL;
 }
-
-void FixBS(DSBS &H, BSNODE BSBF, BSNODE BSAF) // BSBF - Bác si tru?c khi s?a, BSAF - Bác si sau khi s?a
-{
-    cout << "Nhap thong tin BS sau khi sua" << endl;
-    getline(cin,  BSAF->BS.Ho_tenBS);
-    cin.ignore();
-    getline(cin, BSAF->BS.Chuc_vu);
-    cin.ignore();
-    cin >> BSAF->BS.Gia_kham;
-    BSBF = BSAF;
+BSNODE FINDBS1(DSBS H, string maBS) {
+    BSNODE Q = H;
+    while (Q != NULL) {
+        if (Q->BS.MaBS == maBS) {
+            return Q;
+        }
+        Q = Q->nextBS;
+    }
+    return NULL;
+}
+void FixBS(DSBS& dsbs, string maBS) {
+    BSNODE P = FINDBS1(dsbs, maBS);
+    if (P != NULL) {
+        cin.ignore();
+        cout << "\n\tNhap thong tin moi cho bac si" << endl;
+        cout << "Ho va ten: ";
+        getline(cin, P->BS.Ho_tenBS);
+        cout << "Nhap chuc vu: ";
+        getline(cin,P->BS.Chuc_vu);
+        cout << "Nhap ma BS: ";
+        cin >> P->BS.MaBS;
+        cout << "Thong tin thay doi thanh cong!" << endl;
+        cin.ignore();
+    } else {
+        return; 
+    }
 }
 
-void PrintBS(DSBS &H) {
-    if (H == NULL) {
+
+
+void PrintBS(DSBS H) {
+    if (H == nullptr) {
         cout << "Khong co gi de in ra man hinh" << endl;
     } else {
         BSNODE Q = H;
-        while (Q != NULL) {
-            cout << "Ho ten BS: " << Q->BS.Ho_tenBS << endl;
-            cout << "Chuc vu: " << Q->BS.Chuc_vu << endl;
-            cout << "Gia kham: " << Q->BS.Gia_kham << endl;
+        cout << left << setw(20) << "Ho ten BS"
+             << setw(20) << "Chuc vu"
+             << setw(15) << "Gia kham"
+             << setw(15) << "Ma BS"
+             << endl;
+        
+        while (Q != nullptr) {
+            cout << left << setw(20) << Q->BS.Ho_tenBS
+                 << setw(20) << Q->BS.Chuc_vu
+                 << setw(15) << Q->BS.Gia_kham
+                 << Q->BS.MaBS << endl;
             Q = Q->nextBS;
         }
     }

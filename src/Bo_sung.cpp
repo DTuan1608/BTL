@@ -2,6 +2,12 @@
 #include "BOSUNG.h"
 
 using namespace std;
+void InitHD(DSHD &dshd){
+    dshd = NULL;
+    dshd->HD.DVBN = NULL;
+    dshd->HD.BSBN = NULL;
+    dshd->HD.TBN = NULL;
+}
 //Tạo node hóa đơn.
 HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs){
     HDNODE P = new NODEHD;
@@ -23,13 +29,12 @@ HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs){
 }
 void addDoctortoInvoice(Hoa_don& hd, BSNODE bs, DSBS dsbs){
     PrintBS(dsbs);
-    int x;
     BSNODE Bacsi;
     while(true){
-        cout << "Nhap ten bac si ban muon chon." << endl; 
+        cout << "Nhap ma bac si ban muon chon." << endl; 
         string name;
-        getline(cin, name);
-        Bacsi = FINDBS(dsbs, name);
+        cin >> name;
+        Bacsi = FINDBS1(dsbs, name);
         if(Bacsi != NULL){
             InsertBSS(hd.BSBN, Bacsi->BS);
             break;
@@ -70,9 +75,9 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
     DVNODE Dichvu;
     do{
         while(true){
-            cout << "Nhap dich vu ban muon chon." << endl; 
+            cout << "Nhap ma dich vu ban muon chon." << endl; 
             string name;
-            getline(cin, name);
+            cin >> name;
             Dichvu = FindDV(dsdv, name);
             if(Dichvu != NULL){
                 InsertDV(hd.DVBN, Dichvu->DV);
@@ -214,41 +219,11 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                     case 1: DisplayDV(dsdv);break;
                     case 2: NhapDichVu(dsdv);break;
                     case 3: {
-                        DisplayDV(dsdv);
-                        DVNODE P = NULL;
-                        do{
-                            long gia_moi;
-                            cout << "Nhap ten dich vu ban muon sua" << endl;
-                            string name;
-                            cin.ignore();
-                            getline(cin, name);
-                            P = FindDV(dsdv, name);
-                            if(P != NULL){
-                                cout << "Nhap gia moi cua dich vu " << P->DV.Ten_DV << ": ";
-                                cin >> gia_moi;
-                                FixDV(dsdv, P, gia_moi);
-                            }
-                            else cout << "Nhap lai." << endl;
-                            cin.ignore();
-                        }while(P == NULL);
+                        FixDV1(dsdv);
                         break;
                     }
                     case 4:{
-                        DisplayDV(dsdv);
-                        DVNODE P = nullptr;
-                        while(true) {
-                            cout << "Nhap ten dich vu ban muon xoa: ";
-                            string name;
-                            getline(cin, name);
-                            P = FindDV(dsdv, name);
-                            if(P != nullptr) break;
-                            else {
-                                cout << "Nhap lai" << endl;
-                            }
-                        }
-                        if(P != nullptr) {
-                            DeleteDV(dsdv, P->DV.Ten_DV);
-                        }
+                        DeleteDV1(dsdv);
                         break;
                     }
                 }
@@ -265,34 +240,40 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                         PrintBS(dsbs);
                         BSNODE P = new NODEBS;
                         while(1){
-                            cout << "Nhap ten bac si can sua" << endl;
+                            cout << "Nhap ma bac si can sua: ";
                             string name;
-                            getline(cin, name);
-                            P = FINDBS(dsbs, name);
+                            cin >>name;
+                            P = FINDBS1(dsbs, name);
                             if(P != NULL) break;
                             else {
                                 cout << "Nhap lai" << endl;
                                 continue;
                             }
                         }
-                        BSNODE Q = new NODEBS;
-                        FixBS(dsbs, P, Q);
+                        FixBS(dsbs,P->BS.MaBS);
+                        break;
                     }
                     case 4:{
                         PrintBS(dsbs);
                         BSNODE P = new NODEBS;
-                        while(1){
-                            cout << "Nhap ten bac si ban muon xoa: ";
-                            string name;
-                            getline(cin, name);
-                            P = FINDBS(dsbs, name);
-                            if(P != NULL) break;
-                            else {
-                                cout << "Nhap lai" << endl;
-                                continue;
+                        int x;
+                        do{
+                            while(1){
+                                cout << "Nhap ma bac si ban muon xoa: ";
+                                string maBS;
+                                cin >> maBS;
+                                P = FINDBS1(dsbs, maBS);
+                                if(P != NULL) break;
+                                else {
+                                    cout << "Nhap lai" << endl;
+                                    continue;
+                                }
                             }
-                        }
-                        DeleteDV(dsdv, P->BS.Ho_tenBS);
+                            cout <<"Xoa thanh cong bac si: "<<P->BS.Ho_tenBS<<endl;
+                            DeleteBS(dsbs,P->BS.Ho_tenBS);
+                            cout << "Co muon xoa tiep khong (0.Khong, 1.Co)"<< endl;
+                            cin >> x;
+                        }while(x);
                         break;
                     }
                 }
@@ -307,36 +288,50 @@ void Dapung(DSBN& dsbn, DSThuoc T, DSDV dsdv, DSBS dsbs, DSHD dshd){
                     case 2: NhapT(T); break;
                     case 3: {
                         hienThiDanhSachThuoc(T);
-                        NodeT P = new NODET;
+                        NodeT P;
                         string name;
-                        while(1){
-                            cout << "Nhap ma thuoc can sua" << endl;
-                            getline(cin, name);
-                            P = FindT(T, name);
-                            if(P == NULL) cout << "Nhap lai";
-                            else {
-                                cout << "Nhap lai" << endl;
-                                continue;
+                        int x;
+                        do{
+                            while(true){
+                                cout << "Nhap ma thuoc can sua" << endl;
+                                cin >> name;
+                                P = FindT(T, name);
+                                if(P != NULL) {
+                                    FixT(T, name);
+                                    break;
+                                }
+                                else {
+                                    cout << "Nhap lai" << endl;
+                                    continue;
+                                }
                             }
-                        }
-                        FixT(T, name);
+                            cout << "Ban co muon sua thuoc tiep khong?" << endl;
+                            cout << "1. Co          0. Khong" << endl;
+                            cin >> x;
+                        }while(x);
                         break;
                     }
                     case 4:{
                         hienThiDanhSachThuoc(T);
-                        DVNODE P = new NODEDV;
+                        NodeT P;
                         string name;
-                        while(1){
-                            cout << "Nhap ma thuoc ban muon xoa: ";
-                            getline(cin, name);
-                            P = FindDV(dsdv, name);
-                            if(P != NULL) break;
-                            else {
-                                cout << "Nhap lai" << endl;
-                                continue;
+                        do{
+                            while(1){
+                                cout << "Nhap ma thuoc ban muon xoa: ";
+                                cin >> name;
+                                P = FindT(T, name);
+                                if(P != NULL) break;
+                                else {
+                                    cout << "Nhap lai" << endl;
+                                    continue;
+                                }
                             }
-                        }
-                        DeleteT(T, name);
+                            cout << "Da xoa thanh cong thuoc " << P->T.Ten_thuoc << " ra khoi danh sach" << endl;
+                            DeleteT(T, name);
+                            cout << "Ban co muon sua thuoc tiep khong?" << endl;
+                            cout << "1. Co          0. Khong" << endl;
+                            cin >> x;
+                        }while(x);
                         break;
                     }
                 }
