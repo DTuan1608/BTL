@@ -11,14 +11,13 @@ HDNODE Creat_hoa_don(DSDV dsdv, DSThuoc dst, DSBS dsbs){
     cin >> P->HD.dd; cout << "/" ; cin >> P->HD.mm; cout << "/"; cin >> P->HD.yy;
     DVNODE Dichvu = NULL;
     P->HD.DVBN = NULL;
-    NodeT Thuoc = NULL;
     P->HD.TBN = NULL;
     BSNODE Bacsi = NULL;
     P->HD.BSBN = NULL;
+    P->nextHD = NULL;
     addServiceToInvoice(P->HD, Dichvu, dsdv);
     addDoctortoInvoice(P->HD, Bacsi, dsbs);
-    addMedicineToInvoice(P->HD, Thuoc, dst);
-    P->nextHD = NULL;
+    addMedicineToInvoice(P->HD, dst);
     return P;
 }
 void addDoctortoInvoice(Hoa_don& hd, BSNODE bs, DSBS dsbs){
@@ -88,45 +87,45 @@ void addServiceToInvoice(Hoa_don& hd, DVNODE dv, DSDV dsdv) {
     }while(x);
 }
 //Thêm thuốc cho hóa đơn
-void addMedicineToInvoice(Hoa_don& hd, NodeT t, DSThuoc dst) {
-    hienThiDanhSachThuoc(dst);
+void addMedicineToInvoice(Hoa_don& hd, DSThuoc dst) {
+    hienThiDanhSachThuoc(dst); // Display the list of medicines
     int x;
-    do{
-        cout << "Nhap thuoc ban muon chon." << endl; 
-        while(true){
+    do {
+        cout << "Nhap thuoc ban muon chon." << endl;
+        while (true) {
             string Ma_thuoc;
             cin >> Ma_thuoc;
-            NodeT t = FindT(dst, Ma_thuoc);
-            if(t != NULL){
-                while(true){
+            NodeT foundMedicine = FindT(dst, Ma_thuoc); // Find the medicine by code
+            if (foundMedicine != NULL) {
+                while (true) {
                     int Soluong;
-                    cout << "So luong thuoc co ma " << t->T.Ma_thuoc << " la: ";
-                    cout << t->T.so_luong << endl;
+                    cout << "So luong thuoc co ma " << foundMedicine->T.Ma_thuoc << " la: ";
+                    cout << foundMedicine->T.so_luong << endl;
                     cout << "Nhap so luong thuoc" << endl;
                     cin >> Soluong;
-                    if (Soluong <= t->T.so_luong && Soluong > 0) {
-                        THUOC selectedThuoc = t->T;
+                    if (Soluong <= foundMedicine->T.so_luong && Soluong > 0) {
+                        THUOC selectedThuoc = foundMedicine->T;
                         selectedThuoc.so_luong = Soluong;
-                        t->T.so_luong -= Soluong;
-                        InsertT_nhap(hd.TBN, selectedThuoc);
+                        foundMedicine->T.so_luong -= Soluong;
+                        InsertT_nhap(hd.TBN, selectedThuoc); // Insert selected medicine to the invoice
                         break;
-                    }
-                    else{
-                         cout << "Nhap lai so luong thuoc ban lay." << endl;
-                        cout << "Vui long nhap so luong hop le (1 den " << t->T.so_luong << ")." << endl;
+                    } else {
+                        cout << "Nhap lai so luong thuoc ban lay." << endl;
+                        cout << "Vui long nhap so luong hop le (1 den " << foundMedicine->T.so_luong << ")." << endl;
+                        continue;
                     }
                 }
                 break;
-            }
-            else{
+            } else {
                 cout << "Ma thuoc ban tim khong co." << endl;
-                cout << "Nhap lai ma thuoc." << endl;   
+                cout << "Nhap lai ma thuoc." << endl;
+                continue;
             }
         }
         cout << "Ban co muon chon them thuoc khong?" << endl;
-        cout << "Chon 1. Co hoac 0.Khong" << endl;
+        cout << "(1. Co hoac 0.Khong)" << endl;
         cin >> x;
-    }while(x);
+    } while (x);
 }
 //Hiển thị
 void Hienthi(){

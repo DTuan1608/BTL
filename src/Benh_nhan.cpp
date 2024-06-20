@@ -215,41 +215,41 @@ void printfBN2(DSBN dsbn){
     const int numRows = 3;
     const int numCols = 2;
     string arr[numRows][numCols];
-        arr[0][0] = "Ho ten: " + R->BN.Ho_tenBN;
-        arr[0][1] = "Gioi tinh: " + R->BN.Gioi_tinh;
-        arr[1][0] = "Tuoi: " + to_string(R->BN.Tuoi);
-        arr[1][1] = "CCCD: " + R->BN.CCCD;
-        arr[2][0] = "SDT: " + R->BN.SDT;
-        arr[2][1] = "Que: " + R->BN.Que;
+    arr[0][0] = "Ho ten: " + R->BN.Ho_tenBN;
+    arr[0][1] = "Gioi tinh: " + R->BN.Gioi_tinh;
+    arr[1][0] = "Tuoi: " + to_string(R->BN.Tuoi);
+    arr[1][1] = "CCCD: " + R->BN.CCCD;
+    arr[2][0] = "SDT: " + R->BN.SDT;
+    arr[2][1] = "Que: " + R->BN.Que;
 
-        for (int j = 0; j < numRows; j++) {
-            for (int k = 0; k < numCols; k++) {
-                cout << arr[j][k] << "\t";
-            }
-            cout << endl;
+    for (int j = 0; j < numRows; j++) {
+        for (int k = 0; k < numCols; k++) {
+            cout << arr[j][k] << "\t";
         }
-        cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
-        cout << "\tDanh Sach Dich Vu\n";
-        if(R->Hoa_don->HD.DVBN == NULL){
-            cout << "Khong co dich vu duoc chon" << endl;
-        }
-        else printfDV(R->Hoa_don->HD.DVBN);
-        cout << "\tDanh Sach Bac Si\n";
-        if(R->Hoa_don->HD.BSBN == NULL){
-            cout << "Khong co bac si duoc chon" << endl;
-        }
-        else PrintBS(R->Hoa_don->HD.BSBN);
-        if(R->Hoa_don->HD.TBN == NULL) {
-           cout << "Danh sach thuoc cua benh nhan rong.";
-        }
-        else printfT1(R->Hoa_don->HD.TBN);
-        long totalCost = sumT(R->Hoa_don->HD.TBN) + SumDV(R->Hoa_don->HD.DVBN) + R->Hoa_don->HD.BSBN->BS.Gia_kham;
-        cout << "Tong vien phi: " << totalCost << endl;
-        if (R->BN.Bao_hiem) {
-            cout << "Phai tra: " << (totalCost * 60) / 100 << endl;
-        } else {
-            cout << "Phai tra: " << totalCost << endl;
-        }
+        cout << endl;
+    }
+    cout << "Bao hiem: " << R->BN.Bao_hiem << endl;
+    cout << "\tDanh Sach Dich Vu\n";
+    if(R->Hoa_don->HD.DVBN == NULL){
+        cout << "Khong co dich vu duoc chon" << endl;
+    }
+    else printfDV(R->Hoa_don->HD.DVBN);
+    cout << "\tDanh Sach Bac Si\n";
+    if(R->Hoa_don->HD.BSBN == NULL){
+        cout << "Khong co bac si duoc chon" << endl;
+    }
+    else PrintBS(R->Hoa_don->HD.BSBN);
+    if(R->Hoa_don->HD.TBN == NULL) {
+        cout << "Danh sach thuoc cua benh nhan rong.";
+    }
+    else printfT1(R->Hoa_don->HD.TBN);
+    long totalCost = sumT(R->Hoa_don->HD.TBN) + SumDV(R->Hoa_don->HD.DVBN) + R->Hoa_don->HD.BSBN->BS.Gia_kham;
+    cout << "Tong vien phi: " << totalCost << endl;
+    if (R->BN.Bao_hiem) {
+        cout << "Phai tra: " << (totalCost * 60) / 100 << endl;
+    } else {
+        cout << "Phai tra: " << totalCost << endl;
+    }
 }
 //Sửa - xóa Bệnh nhân.
 void SuaxoaBN(DSBN &dsbn){
